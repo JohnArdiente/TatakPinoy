@@ -20,9 +20,13 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Shipments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int ShipmentId)
         {
-            return View(await _context.Shipment.ToListAsync());
+            ViewBag.ShipmentId = ShipmentId;
+            var shipments = _context.Shipment
+           .Include(c => c.Consignees)
+           .AsNoTracking();
+            return View(await shipments.ToListAsync());
         }
 
         // GET: Shipments/Details/5
@@ -54,7 +58,7 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShipmentId,Name,Address,ContactNo")] Shipment shipment)
+        public async Task<IActionResult> Create([Bind("ShipmentId,ShipmentNo")] Shipment shipment)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +90,7 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShipmentId,Name,Address,ContactNo")] Shipment shipment)
+        public async Task<IActionResult> Edit(int id, [Bind("ShipmentId,ShipmentNo")] Shipment shipment)
         {
             if (id != shipment.ShipmentId)
             {

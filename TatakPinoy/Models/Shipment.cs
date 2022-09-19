@@ -11,11 +11,8 @@ namespace TatakPinoy.Models
     {
         [Key]
         public int ShipmentId { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string ContactNo { get; set; }
+        public string ShipmentNo { get; set; }
 
-        [JsonIgnore]
         public ICollection<Consignee> Consignees { get; set; }
     }
 }

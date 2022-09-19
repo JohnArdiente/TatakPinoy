@@ -5,32 +5,43 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">New Entry</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Fname)
+                Tracking Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Mname)
+                Shipper's Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lname)
+                Shipper's Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                Consignee's Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactNo)
+                Consignee's Address
             </th>
             <th>
+                Consignee's Number
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Agent
+            </th>
+            <th>
+                Pick-up Date
+            </th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Shipment)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -38,19 +49,31 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Fname)
+                @Html.DisplayFor(modelItem => item.TrackingNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mname)
+                @Html.DisplayFor(modelItem => item.ShipersName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Lname)
+                @Html.DisplayFor(modelItem => item.ShipersNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.ConsigneesName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactNo)
+                @Html.DisplayFor(modelItem => item.ConsigneesAddr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsigneesNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgentsName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)

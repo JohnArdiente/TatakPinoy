@@ -4,39 +4,56 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>Consignee</h4>
+<h4>Box Information</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Fname" class="control-label"></label>
-                <input asp-for="Fname" class="form-control" />
-                <span asp-validation-for="Fname" class="text-danger"></span>
+                <label class="control-label">Tracking Number</label>
+                <input asp-for="TrackingNo" class="form-control" />
+                <span asp-validation-for="TrackingNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Mname" class="control-label"></label>
-                <input asp-for="Mname" class="form-control" />
-                <span asp-validation-for="Mname" class="text-danger"></span>
+                <label class="control-label">Shipper's Name</label>
+                <input asp-for="ShipersName" class="form-control" />
+                <span asp-validation-for="ShipersName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Lname" class="control-label"></label>
-                <input asp-for="Lname" class="form-control" />
-                <span asp-validation-for="Lname" class="text-danger"></span>
+                <label class="control-label">Shipper's Number</label>
+                <input asp-for="ShipersNo" class="form-control" />
+                <span asp-validation-for="ShipersNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label class="control-label">Consignee's Name</label>
+                <input asp-for="ConsigneesName" class="form-control" />
+                <span asp-validation-for="ConsigneesName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContactNo" class="control-label"></label>
-                <input asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
+                <label class="control-label">Consignee's Address</label>
+                <input asp-for="ConsigneesAddr" class="form-control" />
+                <span asp-validation-for="ConsigneesAddr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Consignee's Number</label>
+                <input asp-for="ConsigneesNo" class="form-control" />
+                <span asp-validation-for="ConsigneesNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Quantity</label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Agent</label>
+                <input asp-for="AgentsName" class="form-control" />
+                <span asp-validation-for="AgentsName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pick-up Date</label>
+                <input asp-for="PickupDate" class="form-control" />
+                <span asp-validation-for="PickupDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShipmentId" class="control-label"></label>

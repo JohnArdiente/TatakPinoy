@@ -20,8 +20,9 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Consignees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int ShipmentId)
         {
+            ViewBag.ShipmentId = ShipmentId;
             var tatakPinoyContext = _context.Consignee.Include(c => c.Shipment);
             return View(await tatakPinoyContext.ToListAsync());
         }
@@ -57,7 +58,7 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsigneeId,Fname,Mname,Lname,Address,ContactNo,ShipmentId")] Consignee consignee)
+        public async Task<IActionResult> Create([Bind("ConsigneeId,TrackingNo,ShipersName,ShipersNo,ConsigneesName,ConsigneesAddr,ConsigneesNo,Qty,AgentsName,PickupDate,ShipmentId")] Consignee consignee)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +92,7 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsigneeId,Fname,Mname,Lname,Address,ContactNo,ShipmentId")] Consignee consignee)
+        public async Task<IActionResult> Edit(int id, [Bind("ConsigneeId,TrackingNo,ShipersName,ShipersNo,ConsigneesName,ConsigneesAddr,ConsigneesNo,Qty,AgentsName,PickupDate,ShipmentId")] Consignee consignee)
         {
             if (id != consignee.ConsigneeId)
             {

@@ -17,5 +17,6 @@ namespace TatakPinoy.Data
         public DbSet<TatakPinoy.Models.Shipment> Shipment { get; set; }
 
         public DbSet<TatakPinoy.Models.Consignee> Consignee { get; set; }
+
     }
 }
