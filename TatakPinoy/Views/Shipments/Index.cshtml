@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TatakPinoy.Models.Shipment>
+﻿@model List<TatakPinoy.Models.Shipment>
 
 @{
     ViewData["Title"] = "Index";
@@ -24,8 +24,8 @@
                 @Html.DisplayFor(modelItem => item.ShipmentNo)
             </td>
             <td>
+                @Html.ActionLink("Update", "Index", "Consignees", new { shipmentid = item.ShipmentId }, null)
                 @*<a asp-action="Edit" asp-route-id="@item.ShipmentId">Edit</a> |*@
-                <a asp-controller="Consignees" asp-action="Index" asp-route-id="@item.Consignees">Update</a>
                 @*<a asp-action="Delete" asp-route-id="@item.ShipmentId">Delete</a>*@
             </td>
         </tr>

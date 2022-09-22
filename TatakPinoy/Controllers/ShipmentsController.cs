@@ -20,13 +20,12 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Shipments
-        public async Task<IActionResult> Index(int ShipmentId)
+        public async Task<IActionResult> Index()
         {
-            ViewBag.ShipmentId = ShipmentId;
-            var shipments = _context.Shipment
+            var shipments = await _context.Shipment
            .Include(c => c.Consignees)
-           .AsNoTracking();
-            return View(await shipments.ToListAsync());
+           .ToListAsync();
+            return View(shipments);
         }
 
         // GET: Shipments/Details/5

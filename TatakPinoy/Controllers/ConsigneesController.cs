@@ -20,10 +20,10 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Consignees
-        public async Task<IActionResult> Index(int ShipmentId)
+        public async Task<IActionResult> Index(int shipmentid)
         {
-            ViewBag.ShipmentId = ShipmentId;
-            var tatakPinoyContext = _context.Consignee.Include(c => c.Shipment);
+            //ViewBag.ShipmentId = ShipmentId;
+            var tatakPinoyContext = _context.Consignee.Where(x=>x.ShipmentId == shipmentid);
             return View(await tatakPinoyContext.ToListAsync());
         }
 
@@ -49,7 +49,7 @@ namespace TatakPinoy.Controllers
         // GET: Consignees/Create
         public IActionResult Create()
         {
-            ViewData["ShipmentId"] = new SelectList(_context.Shipment, "ShipmentId", "ShipmentId");
+            
             return View();
         }
 
