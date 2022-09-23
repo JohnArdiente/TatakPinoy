@@ -14,6 +14,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ConsigneeId" />
+            <input asp-for="ShipmentId" type="hidden" />
             <div class="form-group">
                 <label asp-for="TrackingNo" class="control-label"></label>
                 <input asp-for="TrackingNo" class="form-control" />

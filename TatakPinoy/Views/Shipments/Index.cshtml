@@ -6,7 +6,8 @@
 }
 
 <p>
-    <a asp-action="Create">New Shipment</a>
+    @*<a asp-action="Create">New Shipment</a>*@
+    <a class="btn btn-outline-success my-2 my-sm-0" asp-action="Create">New Shipment</a>
 </p>
 <table class="table">
     <thead>
@@ -24,7 +25,7 @@
                 @Html.DisplayFor(modelItem => item.ShipmentNo)
             </td>
             <td>
-                @Html.ActionLink("Update", "Index", "Consignees", new { shipmentid = item.ShipmentId }, null)
+                @Html.ActionLink("Update", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-outline-success my-2 my-sm-0" })
                 @*<a asp-action="Edit" asp-route-id="@item.ShipmentId">Edit</a> |*@
                 @*<a asp-action="Delete" asp-route-id="@item.ShipmentId">Delete</a>*@
             </td>

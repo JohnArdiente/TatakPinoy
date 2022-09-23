@@ -76,9 +76,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PickupDate)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)
-                </td>
+                </td>*@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ConsigneeId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |
