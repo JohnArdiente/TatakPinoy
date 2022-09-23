@@ -10,7 +10,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="text" asp-for="ShipmentId" value="@Model.Shipment.ShipmentId" />
+            @*<input type="text" asp-for="ShipmentId" value="1" />*@
+            <input asp-for="ShipmentId" type="hidden" />
             <div class="form-group">
                 <label class="control-label">Tracking Number</label>
                 <input asp-for="TrackingNo" class="form-control" />

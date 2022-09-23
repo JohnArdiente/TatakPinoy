@@ -22,8 +22,8 @@ namespace TatakPinoy.Controllers
         // GET: Consignees
         public async Task<IActionResult> Index(int shipmentid)
         {
-            //ViewBag.ShipmentId = ShipmentId;
-            var tatakPinoyContext = _context.Consignee.Where(x=>x.ShipmentId == shipmentid);
+            ViewBag.ShipmentId = shipmentid;
+            var tatakPinoyContext = _context.Consignee.Include(x=>x.Shipment).Where(x=>x.ShipmentId == shipmentid);
             return View(await tatakPinoyContext.ToListAsync());
         }
 
@@ -47,10 +47,9 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Consignees/Create
-        public IActionResult Create()
+        public IActionResult Create(int shipmentId)
         {
-            
-            return View();
+            return View(new Consignee() { ShipmentId = shipmentId });
         }
 
         // POST: Consignees/Create
@@ -64,9 +63,11 @@ namespace TatakPinoy.Controllers
             {
                 _context.Add(consignee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { shipmentid = consignee.ShipmentId });
             }
             ViewData["ShipmentId"] = new SelectList(_context.Shipment, "ShipmentId", "ShipmentId", consignee.ShipmentId);
+            
             return View(consignee);
         }
 
@@ -150,7 +151,8 @@ namespace TatakPinoy.Controllers
             var consignee = await _context.Consignee.FindAsync(id);
             _context.Consignee.Remove(consignee);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { shipmentid = consignee.ShipmentId });
         }
 
         private bool ConsigneeExists(int id)
