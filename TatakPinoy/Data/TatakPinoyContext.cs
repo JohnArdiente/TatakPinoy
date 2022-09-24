@@ -18,5 +18,17 @@ namespace TatakPinoy.Data
 
         public DbSet<TatakPinoy.Models.Consignee> Consignee { get; set; }
 
+        public DbSet<UserModel> UserModels { get; set; }
+
+        public DbSet<TatakPinoy.Models.Status> Status { get; set; }
+
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Shipment>()
+                .HasOne(b => b.Status)
+                .WithOne(i => i.Shipment)
+                .HasForeignKey<Status>(b => b.ShipmentId);
+        }*/
+
     }
 }

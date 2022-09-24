@@ -14,5 +14,8 @@ namespace TatakPinoy.Models
         public string ShipmentNo { get; set; }
 
         public ICollection<Consignee> Consignees { get; set; }
+
+        public int? StatusId { get; set; }
+        public Status Status { get; set; }
     }
 }

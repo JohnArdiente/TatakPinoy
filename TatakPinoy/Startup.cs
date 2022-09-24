@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TatakPinoy.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace TatakPinoy
 {
@@ -29,6 +30,8 @@ namespace TatakPinoy
 
             services.AddDbContext<TatakPinoyContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TatakPinoyContext")));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x => x.LoginPath = "/account/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +51,7 @@ namespace TatakPinoy
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

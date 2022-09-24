@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,11 @@ namespace TatakPinoy.Controllers
         {
             _logger = logger;
         }
+        [Authorize]
+        public IActionResult ConfidentialData()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
@@ -33,5 +39,6 @@ namespace TatakPinoy.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

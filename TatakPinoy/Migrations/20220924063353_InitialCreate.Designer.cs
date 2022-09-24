@@ -10,7 +10,7 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20220919133009_InitialCreate")]
+    [Migration("20220924063353_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace TatakPinoy.Migrations
                     b.Property<int>("ShipersNo")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShipmentId")
+                    b.Property<int?>("ShipmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("TrackingNo")
@@ -75,18 +75,66 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ShipmentNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
                     b.HasKey("ShipmentId");
 
+                    b.HasIndex("StatusId")
+                        .IsUnique()
+                        .HasFilter("[StatusId] IS NOT NULL");
+
                     b.ToTable("Shipment");
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.Status", b =>
+                {
+                    b.Property<int>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StatusDesc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("Status");
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.UserModel", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserModels");
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.Consignee", b =>
                 {
                     b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
-                        .WithMany("Consignee")
-                        .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Consignees")
+                        .HasForeignKey("ShipmentId");
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
+                {
+                    b.HasOne("TatakPinoy.Models.Status", "Status")
+                        .WithOne("Shipment")
+                        .HasForeignKey("TatakPinoy.Models.Shipment", "StatusId");
                 });
 #pragma warning restore 612, 618
         }
