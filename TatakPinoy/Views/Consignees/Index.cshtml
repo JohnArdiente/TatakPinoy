@@ -3,88 +3,97 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
 }
+<form class="form-inline float-right" asp-controller="Consignees" asp-action="Search">
+    <input class="form-control mr-sm-2" type="text" name="SearchString" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button>
+</form>
 <p>
-    <a asp-action="Create" asp-route-shipmentId="@ViewBag.ShipmentId">New Entry</a>
+    <a class="btn btn-outline-success my-2 my-sm-0" asp-action="Create" asp-route-shipmentId="@ViewBag.ShipmentId">New Entry</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Tracking Number
-            </th>
-            <th>
-                Shipper's Name
-            </th>
-            <th>
-                Shipper's Number
-            </th>
-            <th>
-                Consignee's Name
-            </th>
-            <th>
-                Consignee's Address
-            </th>
-            <th>
-                Consignee's Number
-            </th>
-            <th>
-                Quantity
-            </th>
-            <th>
-                Agent
-            </th>
-            <th>
-                Pick-up Date
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Shipment)
-                </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TrackingNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipersName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipersNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConsigneesName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConsigneesAddr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConsigneesNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Qty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgentsName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PickupDate)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)
-                </td>*@
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ConsigneeId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
-                </td>
+                <th>
+                    Tracking Number
+                </th>
+                <th>
+                    Shipper's Name
+                </th>
+                <th>
+                    Shipper's Number
+                </th>
+                <th>
+                    Consignee's Name
+                </th>
+                <th>
+                    Consignee's Address
+                </th>
+                <th>
+                    Consignee's Number
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Agent
+                </th>
+                <th>
+                    Pick-up Date
+                </th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipersName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipersNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesAddr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgentsName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PickupDate)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)
+                        </td>*@
+                    <td>
+                        <a class="btn btn-outline-primary my-2 my-lg-0" asp-action="Edit" asp-route-id="@item.ConsigneeId">Edit</a> |
+                        @*<a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |*@
+                        <a class="btn btn-outline-danger my-2 my-sm-0" asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-block alert-danger">
+        <i class="ace-icon fa fa-warning red"></i>
+        No Records found
+    </div>
+}

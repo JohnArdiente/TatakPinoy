@@ -10,10 +10,10 @@ namespace TatakPinoy.Models
         public int ConsigneeId { get; set; }
         public string TrackingNo { get; set; }
         public string ShipersName { get; set; }
-        public int ShipersNo { get; set; }
+        public string ShipersNo { get; set; }
         public string ConsigneesName { get; set; }
         public string ConsigneesAddr { get; set; }
-        public int ConsigneesNo { get; set; }
+        public string ConsigneesNo { get; set; }
         public int Qty { get; set; }
         public string AgentsName { get; set; }
         public DateTime PickupDate { get; set; }

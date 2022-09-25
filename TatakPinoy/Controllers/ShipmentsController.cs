@@ -57,6 +57,7 @@ namespace TatakPinoy.Controllers
         // GET: Shipments/Create
         public IActionResult Create()
         {
+            PopulateStatusDropDownList();
             return View();
         }
 
@@ -69,6 +70,7 @@ namespace TatakPinoy.Controllers
         {
             if (ModelState.IsValid)
             {
+                shipment.StatusId = 1;
                 _context.Add(shipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,42 +91,44 @@ namespace TatakPinoy.Controllers
             {
                 return NotFound();
             }
+            PopulateStatusDropDownList(shipment.StatusId);
             return View(shipment);
         }
 
         // POST: Shipments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShipmentId,ShipmentNo")] Shipment shipment)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != shipment.ShipmentId)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var shipmentToUpdate = await _context.Shipment
+                .FirstOrDefaultAsync(c => c.ShipmentId == id);
+
+            if (await TryUpdateModelAsync<Shipment>(shipmentToUpdate,
+                "",
+                c => c.ShipmentNo, c => c.StatusId))
             {
                 try
                 {
-                    _context.Update(shipment);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!ShipmentExists(shipment.ShipmentId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shipment);
+            PopulateStatusDropDownList(shipmentToUpdate.StatusId);
+            return View(shipmentToUpdate);
         }
 
         // GET: Shipments/Delete/5
@@ -159,6 +163,14 @@ namespace TatakPinoy.Controllers
         private bool ShipmentExists(int id)
         {
             return _context.Shipment.Any(e => e.ShipmentId == id);
+        }
+
+        private void PopulateStatusDropDownList(object selectedStatus = null)
+        {
+            var statusQuery = from d in _context.Status
+                                   orderby d.StatusId
+                                   select d;
+            ViewBag.StatusId = new SelectList(statusQuery, "StatusId", "StatusDesc", selectedStatus);
         }
     }
 }

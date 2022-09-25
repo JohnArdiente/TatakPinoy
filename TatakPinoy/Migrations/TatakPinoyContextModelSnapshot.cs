@@ -35,8 +35,8 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ConsigneesName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ConsigneesNo")
-                        .HasColumnType("int");
+                    b.Property<string>("ConsigneesNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PickupDate")
                         .HasColumnType("datetime2");
@@ -47,8 +47,8 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ShipersName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShipersNo")
-                        .HasColumnType("int");
+                    b.Property<string>("ShipersNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ShipmentId")
                         .HasColumnType("int");
@@ -78,10 +78,6 @@ namespace TatakPinoy.Migrations
 
                     b.HasKey("ShipmentId");
 
-                    b.HasIndex("StatusId")
-                        .IsUnique()
-                        .HasFilter("[StatusId] IS NOT NULL");
-
                     b.ToTable("Shipment");
                 });
 
@@ -92,10 +88,15 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ShipmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("StatusDesc")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StatusId");
+
+                    b.HasIndex("ShipmentId");
 
                     b.ToTable("Status");
                 });
@@ -128,11 +129,11 @@ namespace TatakPinoy.Migrations
                         .HasForeignKey("ShipmentId");
                 });
 
-            modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
+            modelBuilder.Entity("TatakPinoy.Models.Status", b =>
                 {
-                    b.HasOne("TatakPinoy.Models.Status", "Status")
-                        .WithOne("Shipment")
-                        .HasForeignKey("TatakPinoy.Models.Shipment", "StatusId");
+                    b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
+                        .WithMany("Status")
+                        .HasForeignKey("ShipmentId");
                 });
 #pragma warning restore 612, 618
         }

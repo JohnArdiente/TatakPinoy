@@ -20,11 +20,24 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Consignees
-        public async Task<IActionResult> Index(int shipmentid)
+        public async Task<IActionResult> Index(int shipmentid, string searchString)
         {
             ViewBag.ShipmentId = shipmentid;
             var tatakPinoyContext = _context.Consignee.Include(x=>x.Shipment).Where(x=>x.ShipmentId == shipmentid);
+
+
             return View(await tatakPinoyContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var consignees = from s in _context.Consignee.Include(x => x.Shipment) select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                consignees = consignees.Where(x => x.TrackingNo!.Contains(searchString));
+            }
+
+            return View(await consignees.ToListAsync());
         }
 
         // GET: Consignees/Details/5

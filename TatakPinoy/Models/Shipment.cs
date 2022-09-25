@@ -16,6 +16,6 @@ namespace TatakPinoy.Models
         public ICollection<Consignee> Consignees { get; set; }
 
         public int? StatusId { get; set; }
-        public Status Status { get; set; }
+        public ICollection<Status> Status { get; set; }
     }
 }

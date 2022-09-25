@@ -22,13 +22,5 @@ namespace TatakPinoy.Data
 
         public DbSet<TatakPinoy.Models.Status> Status { get; set; }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Shipment>()
-                .HasOne(b => b.Status)
-                .WithOne(i => i.Shipment)
-                .HasForeignKey<Status>(b => b.ShipmentId);
-        }*/
-
     }
 }
