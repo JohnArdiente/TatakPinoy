@@ -5,7 +5,7 @@
 
 
 
-<div class="text-center">
+@*<div class="text-center">
         <h1 class="display-4">Welcome</h1>
 
         <form class="form-inline">
@@ -13,7 +13,375 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
+*@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Presento Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/portfolio_boostrap/img/favicon.png" rel="icon">
+    <link href="~/portfolio_boostrap/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/portfolio_boostrap/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/portfolio_boostrap/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/portfolio_boostrap/css/styles.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Presento - v3.9.0
+    * Template URL: https://bootstrapmade.com/presento-bootstrap-corporate-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"><a href="index.html">TatakPinoy</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
+                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
+
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Logout">Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login">Login</a>
+                        }
+                    </li>
+                    <li><a class="nav-link scrollto" href="#about">Shipments</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
+        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+            <div class="row">
+                <div class="col-xl-6 bb" style="margin-left: 10px">
+                    <h1>Balik Bayan Box Service</h1>
+                    <h2>Search your tracking number:</h2>
+                    <input type="search" name="email" style="width: 300px; height: 46px" placeholder="ABC-101-245">
+                    <a href="#about" class="btn-get-started scrollto">Search</a>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>GALLERY</h2>
+                    <p>The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog.</p>
+                </div>
+
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t1.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t2.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t3.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t4.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t5u.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/t6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-wrap">
+                            <img src="~/portfolio_boostrap/img/portfolio/t6u.jpg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+
+                                <div class="portfolio-links">
+                                    <a href="~/portfolio_boostrap/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*  <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                            <div class="portfolio-wrap">
+                                <img src="~/portfolio_boostrap/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Card 1</h4>
+                                    <p>Card</p>
+                                    <div class="portfolio-links">
+                                        <a href="~/portfolio_boostrap/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
+                                        <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                            <div class="portfolio-wrap">
+                                <img src="~/portfolio_boostrap/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Card 3</h4>
+                                    <p>Card</p>
+                                    <div class="portfolio-links">
+                                        <a href="~/portfolio_boostrap/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
+                                        <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                            <div class="portfolio-wrap">
+                                <img src="~/portfolio_boostrap/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Web 3</h4>
+                                    <p>Web</p>
+                                    <div class="portfolio-links">
+                                        <a href="~/portfolio_boostrap/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                        <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                </div>
+
+            </div>
+        </section><!-- End Portfolio Section -->
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg ">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Services</h2>
+                    <p>The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <i class="bi bi-briefcase"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-card-checklist"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-bar-chart"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-binoculars"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="500">
+                            <i class="bi bi-brightness-high"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="600">
+                            <i class="bi bi-calendar4-week"></i>
+                            <h4><a href="#">The Quick</a></h4>
+                            <p>The quick brown fox jumps over the lazy dog</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Contact</h2>
+                    <p>The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog.</p>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="col-lg-6">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="info-box">
+                                    <i class="bx bx-map"></i>
+                                    <h3>Our Address</h3>
+                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-envelope"></i>
+                                    <h3>Email Us</h3>
+                                    <p>info@example.com<br>contact@example.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-phone-call"></i>
+                                    <h3>Call Us</h3>
+                                    <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center"><button type="submit">Send Message</button></div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/portfolio_boostrap/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/portfolio_boostrap/vendor/aos/aos.js"></script>
+    <script src="~/portfolio_boostrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/portfolio_boostrap/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/portfolio_boostrap/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/portfolio_boostrap/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/portfolio_boostrap/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/portfolio_boostrap/js/main.js"></script>
+
+</body>
+
+</html>
