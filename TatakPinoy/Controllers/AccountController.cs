@@ -19,16 +19,9 @@ namespace TatakPinoy.Controllers
             users.Add(new UserModel()
             {
                 UserId = 1,
-                Username = "Anoop",
+                Username = "Ivonne",
                 Password = "123",
                 Role = "Admin"
-            });
-            users.Add(new UserModel()
-            {
-                UserId = 2,
-                Username = "Other",
-                Password = "123",
-                Role = "User"
             });
         }
         public IActionResult Login(string ReturnUrl = "/")

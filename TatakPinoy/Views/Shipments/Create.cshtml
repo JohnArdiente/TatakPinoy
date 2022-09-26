@@ -5,34 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+    <h4>Create new Shipment</h4>
+    <hr />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ShipmentNo" class="control-label"> Shipment Number: </label>
+                        <input asp-for="ShipmentNo" class="form-control" />
+                        <span asp-validation-for="ShipmentNo" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success" />
+                        <a class="btn btn-outline-success" asp-action="Index">Back to List</a>
+                    </div>
+                </form>
+            </div>
 
-<h4>Shipment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ShipmentNo" class="control-label"></label>
-                <input asp-for="ShipmentNo" class="form-control" />
-                <span asp-validation-for="ShipmentNo" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label>PAP Title:</label>
-                @Html.DropDownList("PrexcId", null, htmlAttributes: new { @class = "prexcDropdown form-control", @id = "ddlBranches", onchange = "return get_sbu(this)" })
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
+
+        <div>
+
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

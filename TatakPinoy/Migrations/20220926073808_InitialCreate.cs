@@ -51,7 +51,8 @@ namespace TatakPinoy.Migrations
                     Qty = table.Column<int>(nullable: false),
                     AgentsName = table.Column<string>(nullable: true),
                     PickupDate = table.Column<DateTime>(nullable: false),
-                    ShipmentId = table.Column<int>(nullable: true)
+                    ShipmentId = table.Column<int>(nullable: true),
+                    ConsigneeStatusId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,10 +85,35 @@ namespace TatakPinoy.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ConsigneeStatus",
+                columns: table => new
+                {
+                    ConsigneeStatusId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ConsigneeStatusDesc = table.Column<string>(nullable: true),
+                    ConsigneeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConsigneeStatus", x => x.ConsigneeStatusId);
+                    table.ForeignKey(
+                        name: "FK_ConsigneeStatus_Consignee_ConsigneeId",
+                        column: x => x.ConsigneeId,
+                        principalTable: "Consignee",
+                        principalColumn: "ConsigneeId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Consignee_ShipmentId",
                 table: "Consignee",
                 column: "ShipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConsigneeStatus_ConsigneeId",
+                table: "ConsigneeStatus",
+                column: "ConsigneeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Status_ShipmentId",
@@ -98,13 +124,16 @@ namespace TatakPinoy.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Consignee");
+                name: "ConsigneeStatus");
 
             migrationBuilder.DropTable(
                 name: "Status");
 
             migrationBuilder.DropTable(
                 name: "UserModels");
+
+            migrationBuilder.DropTable(
+                name: "Consignee");
 
             migrationBuilder.DropTable(
                 name: "Shipment");

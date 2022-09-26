@@ -53,6 +53,7 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+
 </head>
 
 <body>
@@ -67,10 +68,17 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
-
+                    <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
+                    <div class="dropdown">
+                        <a class="nav-link scrollto" href="#contact">Master Data</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
+                            <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
+                        </ul>
+                    </div>
                     <li>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -81,7 +89,6 @@
                             <a asp-controller="Account" asp-action="Login">Login</a>
                         }
                     </li>
-                    <li><a class="nav-link scrollto" href="#about">Shipments</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -90,9 +97,9 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
 
-        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+        <div class="container " data-aos="zoom-out" data-aos-delay="100">
             <div class="row">
-                <div class="col-xl-6 bb" style="margin-left: 10px">
+                <div class="col-xl-6 bb" style="margin-left: 410px">
                     <h1>Balik Bayan Box Service</h1>
                     <h2>Search your tracking number:</h2>
                     <input type="search" name="email" style="width: 300px; height: 46px" placeholder="ABC-101-245">

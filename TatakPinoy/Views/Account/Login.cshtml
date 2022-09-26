@@ -68,7 +68,14 @@
                             <div class="card-body p-4 p-lg-5 text-black">
 
                                 <form asp-action="Login">
-
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                                    {
+                                        <span class="text-danger">
+                                            @ViewBag.Message
+                                        </span>
+                                    }
+                                    @Html.HiddenFor(x => x.ReturnUrl)
                                     <div class="d-flex align-items-center mb-3 pb-1" style="margin-left: 170px;">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                         <img src="~/portfolio_boostrap/img/LoginTatakPinoy.png" class="bx-pull-right" />

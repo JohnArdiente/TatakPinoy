@@ -22,5 +22,7 @@ namespace TatakPinoy.Data
 
         public DbSet<TatakPinoy.Models.Status> Status { get; set; }
 
+        public DbSet<TatakPinoy.Models.ConsigneeStatus> ConsigneeStatus { get; set; }
+
     }
 }

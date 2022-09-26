@@ -23,7 +23,7 @@ namespace TatakPinoy.Controllers
         public async Task<IActionResult> Index(int shipmentid, string searchString)
         {
             ViewBag.ShipmentId = shipmentid;
-            var tatakPinoyContext = _context.Consignee.Include(x=>x.Shipment).Where(x=>x.ShipmentId == shipmentid);
+            var tatakPinoyContext = _context.Consignee.Include(x=>x.Shipment).Include(x=>x.ConsigneeStatus).Where(x=>x.ShipmentId == shipmentid);
 
 
             return View(await tatakPinoyContext.ToListAsync());
@@ -74,6 +74,7 @@ namespace TatakPinoy.Controllers
         {
             if (ModelState.IsValid)
             {
+                consignee.ConsigneeStatusId = 1;
                 _context.Add(consignee);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
@@ -97,44 +98,44 @@ namespace TatakPinoy.Controllers
             {
                 return NotFound();
             }
-            ViewData["ShipmentId"] = new SelectList(_context.Shipment, "ShipmentId", "ShipmentId", consignee.ShipmentId);
+            PopulateConsigneeStatusDropDownList(consignee.ConsigneeStatusId);
             return View(consignee);
         }
 
         // POST: Consignees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsigneeId,TrackingNo,ShipersName,ShipersNo,ConsigneesName,ConsigneesAddr,ConsigneesNo,Qty,AgentsName,PickupDate,ShipmentId")] Consignee consignee)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != consignee.ConsigneeId)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var consigneeToUpdate = await _context.Consignee
+                .FirstOrDefaultAsync(c => c.ConsigneeId == id);
+
+            if (await TryUpdateModelAsync<Consignee>(consigneeToUpdate,
+                "",
+                c => c.TrackingNo, c => c.ConsigneeStatusId))
             {
                 try
                 {
-                    _context.Update(consignee);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!ConsigneeExists(consignee.ConsigneeId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { shipmentid = consigneeToUpdate.ShipmentId });
             }
-            ViewData["ShipmentId"] = new SelectList(_context.Shipment, "ShipmentId", "ShipmentId", consignee.ShipmentId);
-            return View(consignee);
+            PopulateConsigneeStatusDropDownList(consigneeToUpdate.ConsigneeStatusId);
+            return View(consigneeToUpdate);
         }
 
         // GET: Consignees/Delete/5
@@ -171,6 +172,13 @@ namespace TatakPinoy.Controllers
         private bool ConsigneeExists(int id)
         {
             return _context.Consignee.Any(e => e.ConsigneeId == id);
+        }
+        private void PopulateConsigneeStatusDropDownList(object selectedStatus = null)
+        {
+            var statusQuery = from d in _context.ConsigneeStatus
+                              orderby d.ConsigneeStatusId
+                              select d;
+            ViewBag.ConsigneeStatusId = new SelectList(statusQuery, "ConsigneeStatusId", "ConsigneeStatusDesc", selectedStatus);
         }
     }
 }
