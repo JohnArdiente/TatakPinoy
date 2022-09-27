@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TatakPinoy.Data;
 using TatakPinoy.Models;
+using TatakPinoy.Services;
 
 namespace TatakPinoy.Controllers
 {
     public class AccountController : Controller
     {
         public List<UserModel> users = null;
+        private readonly IUserService _userService;
+        private readonly TatakPinoyContext _context;
         public AccountController()
         {
             users = new List<UserModel>();
@@ -23,7 +27,27 @@ namespace TatakPinoy.Controllers
                 Password = "123",
                 Role = "Admin"
             });
+
         }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            ViewBag.layout = "_Layout";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(UserModel fmisUser)
+        {
+            fmisUser.Password = _userService.HashPassword(fmisUser, fmisUser.Password);
+            _context.Add(fmisUser);
+            _context.SaveChanges();
+            ViewBag.layout = "_Layout";
+            return View("~/Views/Account/CreateUser.cshtml");
+        }
+
         public IActionResult Login(string ReturnUrl = "/")
         {
             LoginModel objLoginModel = new LoginModel();

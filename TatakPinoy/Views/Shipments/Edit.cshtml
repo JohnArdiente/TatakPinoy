@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h4>Update Shipment</h4>
-<br />
+<div class="container">
+    <h4>Update Shipment</h4>
+    <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Edit">
@@ -30,7 +30,7 @@
             </form>
         </div>
     </div>
-
+</div>
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

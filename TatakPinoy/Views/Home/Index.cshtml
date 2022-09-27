@@ -58,51 +58,16 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container d-flex align-items-center">
-            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"><a href="index.html">TatakPinoy</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
-                    <div class="dropdown">
-                        <a class="nav-link scrollto" href="#contact">Master Data</a></li>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
-                            <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
-                        </ul>
-                    </div>
-                    <li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a asp-controller="Account" asp-action="Logout">Logout</a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Account" asp-action="Login">Login</a>
-                        }
-                    </li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-        </div>
-    </header><!-- End Header -->
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
 
         <div class="container " data-aos="zoom-out" data-aos-delay="100">
             <div class="row">
-                <div class="col-xl-6 bb" style="margin-left: 410px">
+                <div class="col-xl-6 bb" >
                     <h1>Balik Bayan Box Service</h1>
                     <h2>Search your tracking number:</h2>
-                    <input type="search" name="email" style="width: 300px; height: 46px" placeholder="ABC-101-245">
+                    <input type="search" name="email" style="width: 350px; height: 46px" placeholder="ABC-101-245">
                     <a href="#about" class="btn-get-started scrollto">Search</a>
                 </div>
             </div>

@@ -15,9 +15,7 @@
 <link href="~assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">-->
 <!-- Template Main CSS File -->
 <!--<link href="assets/css/main.css" rel="stylesheet">-->
-<!-- Favicons -->
-<link href="~/portfolio_boostrap/img/favicon.png" rel="icon">
-<link href="~/portfolio_boostrap/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -34,8 +32,6 @@
 <!-- Template Main CSS File -->
 <link href="~/portfolio_boostrap/css/styles.css" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -52,7 +48,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
-            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"><a href="index.html">TatakPinoy</a></h1>
+            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"><a >TatakPinoy</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
@@ -64,13 +60,21 @@
                     <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
-                    <div class="dropdown">
-                        <a class="nav-link scrollto" href="#contact">Master Data</a></li>
-                        <ul class="dropdown-menu">
+                    <li class="dropdown">
+                        <a href="#"><span>Master Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
                             <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
                             <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
                         </ul>
-                    </div>
+                    </li>
+                    @*        <div class="dropdown">
+            <a class="nav-link scrollto" href="#contact">Master Data</a></li>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
+                <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
+            </ul>
+        </div>*@
+
                     <li>
                         @if (User.Identity.IsAuthenticated)
                         {
