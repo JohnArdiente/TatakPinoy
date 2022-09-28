@@ -27,13 +27,13 @@ namespace TatakPinoy.Controllers
             /*var shipments = await _context.Shipment
            .Include(c => c.Consignees)
            .ToListAsync();*/
-            var shipments = from s in _context.Shipment select s;
+            /*var shipments = from s in _context.Shipment select s;
             if(!String.IsNullOrEmpty(searchString))
             {
                 shipments = shipments.Where(x => x.ShipmentNo!.Contains(searchString));
-            }
+            }*/
 
-            return View(await shipments.ToListAsync());
+            return View(await _context.Shipment.Include(x=>x.Status).ToListAsync());
         }
 
         // GET: Shipments/Details/5

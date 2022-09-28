@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace TatakPinoy.Models
 
         public ICollection<Consignee> Consignees { get; set; }
 
-        public int? StatusId { get; set; }
-        public IEnumerable<Status> Status { get; set; }
+        [ForeignKey("StatusId")]
+        public int StatusId { get; set; }
+        [JsonIgnore]
+        public Status Status { get; set; }
     }
 }

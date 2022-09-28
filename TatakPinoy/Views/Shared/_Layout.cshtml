@@ -57,16 +57,20 @@
                     <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
 
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Master Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                            <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
-                            <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>Master Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
+                                <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
+                            </ul>
+                        </li>
+                    }
+
                     @*        <div class="dropdown">
             <a class="nav-link scrollto" href="#contact">Master Data</a></li>
             <ul class="dropdown-menu">

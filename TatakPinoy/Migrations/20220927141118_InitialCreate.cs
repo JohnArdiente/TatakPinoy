@@ -8,17 +8,16 @@ namespace TatakPinoy.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Shipment",
+                name: "Status",
                 columns: table => new
                 {
-                    ShipmentId = table.Column<int>(nullable: false)
+                    StatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShipmentNo = table.Column<string>(nullable: true),
-                    StatusId = table.Column<int>(nullable: true)
+                    StatusDesc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shipment", x => x.ShipmentId);
+                    table.PrimaryKey("PK_Status", x => x.StatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,6 +33,26 @@ namespace TatakPinoy.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserModels", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shipment",
+                columns: table => new
+                {
+                    ShipmentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShipmentNo = table.Column<string>(nullable: true),
+                    StatusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipment", x => x.ShipmentId);
+                    table.ForeignKey(
+                        name: "FK_Shipment_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,26 +78,6 @@ namespace TatakPinoy.Migrations
                     table.PrimaryKey("PK_Consignee", x => x.ConsigneeId);
                     table.ForeignKey(
                         name: "FK_Consignee_Shipment_ShipmentId",
-                        column: x => x.ShipmentId,
-                        principalTable: "Shipment",
-                        principalColumn: "ShipmentId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Status",
-                columns: table => new
-                {
-                    StatusId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusDesc = table.Column<string>(nullable: true),
-                    ShipmentId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Status", x => x.StatusId);
-                    table.ForeignKey(
-                        name: "FK_Status_Shipment_ShipmentId",
                         column: x => x.ShipmentId,
                         principalTable: "Shipment",
                         principalColumn: "ShipmentId",
@@ -116,18 +115,16 @@ namespace TatakPinoy.Migrations
                 column: "ConsigneeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Status_ShipmentId",
-                table: "Status",
-                column: "ShipmentId");
+                name: "IX_Shipment_StatusId",
+                table: "Shipment",
+                column: "StatusId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "ConsigneeStatus");
-
-            migrationBuilder.DropTable(
-                name: "Status");
 
             migrationBuilder.DropTable(
                 name: "UserModels");
@@ -137,6 +134,9 @@ namespace TatakPinoy.Migrations
 
             migrationBuilder.DropTable(
                 name: "Shipment");
+
+            migrationBuilder.DropTable(
+                name: "Status");
         }
     }
 }

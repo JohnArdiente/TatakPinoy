@@ -10,7 +10,7 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20220926073808_InitialCreate")]
+    [Migration("20220927141118_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,10 +98,13 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ShipmentNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("ShipmentId");
+
+                    b.HasIndex("StatusId")
+                        .IsUnique();
 
                     b.ToTable("Shipment");
                 });
@@ -113,15 +116,10 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ShipmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StatusDesc")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StatusId");
-
-                    b.HasIndex("ShipmentId");
 
                     b.ToTable("Status");
                 });
@@ -161,11 +159,13 @@ namespace TatakPinoy.Migrations
                         .HasForeignKey("ConsigneeId");
                 });
 
-            modelBuilder.Entity("TatakPinoy.Models.Status", b =>
+            modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
                 {
-                    b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
-                        .WithMany("Status")
-                        .HasForeignKey("ShipmentId");
+                    b.HasOne("TatakPinoy.Models.Status", "Status")
+                        .WithOne("Shipment")
+                        .HasForeignKey("TatakPinoy.Models.Shipment", "StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

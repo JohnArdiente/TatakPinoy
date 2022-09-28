@@ -39,7 +39,7 @@
                             @Html.DisplayFor(modelItem => item.ShipmentNo)
                         </td>
                         <td>
-                            @item.ShipmentId
+                            @item.Status.StatusDesc
                         </td>
                         <td>
                             @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-outline-success my-2 my-sm-0" })
