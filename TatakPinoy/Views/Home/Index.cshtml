@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<TatakPinoy.Models.Consignee>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -63,12 +64,14 @@
     <section id="hero" class="d-flex align-items-center">
         <div class="container " data-aos="zoom-out" data-aos-delay="100">
             <div class="row">
-                <div class="col-xl-6 bb" >
-                    <h1>Balik Bayan Box Service</h1>
-                    <p>For easy access, please track your boxes as indicated!</p>
-                    <input type="search" name="email" style="width: 350px; height: 46px" placeholder="ABC-101-245">
-                    <a href="#about" class="btn-get-started scrollto">Search</a>
-                </div>
+                <form asp-controller="Home" asp-action="Track">
+                    <div class="col-xl-6 bb">
+                        <h1>Balik Bayan Box Service</h1>
+                        <p>For easy access, please track your boxes as indicated!</p>
+                        <input type="text" name="Track" style="width: 350px; height: 46px" placeholder="ABC-101-245">
+                        <button class="btn-get-started scrollto">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section><!-- End Hero -->

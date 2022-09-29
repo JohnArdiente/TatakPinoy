@@ -85,7 +85,7 @@ namespace TatakPinoy.Controllers
                     {
                         IsPersistent = objLoginModel.RememberLogin
                     });
-                    return View("~/Views/Shipments/Create.cshtml");
+                    return LocalRedirect(objLoginModel.ReturnUrl);
                 }
             }
             return View(objLoginModel);
