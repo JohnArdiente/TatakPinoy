@@ -10,8 +10,8 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20220927141118_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221003054314_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,11 +75,14 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ConsigneeId")
+                    b.Property<int>("ConsigneeId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConsigneeStatusDesc")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ConsigneeStatusId");
 
@@ -131,6 +134,10 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -156,7 +163,9 @@ namespace TatakPinoy.Migrations
                 {
                     b.HasOne("TatakPinoy.Models.Consignee", "Consignee")
                         .WithMany("ConsigneeStatus")
-                        .HasForeignKey("ConsigneeId");
+                        .HasForeignKey("ConsigneeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>

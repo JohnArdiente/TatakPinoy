@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatakPinoy.Data;
 
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    partial class TatakPinoyContextModelSnapshot : ModelSnapshot
+    [Migration("20221003060331_fixed models")]
+    partial class fixedmodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +125,8 @@ namespace TatakPinoy.Migrations
 
                     b.HasKey("ShipmentId");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("StatusId")
+                        .IsUnique();
 
                     b.ToTable("Shipment");
                 });
@@ -134,9 +137,6 @@ namespace TatakPinoy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ShipmentId")
-                        .HasColumnType("int");
 
                     b.Property<string>("StatusDesc")
                         .HasColumnType("nvarchar(max)");
@@ -200,8 +200,8 @@ namespace TatakPinoy.Migrations
             modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
                 {
                     b.HasOne("TatakPinoy.Models.Status", "Status")
-                        .WithMany("Shipment")
-                        .HasForeignKey("StatusId")
+                        .WithOne("Shipment")
+                        .HasForeignKey("TatakPinoy.Models.Shipment", "StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

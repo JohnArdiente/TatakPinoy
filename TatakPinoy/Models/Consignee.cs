@@ -22,6 +22,7 @@ namespace TatakPinoy.Models
         public Shipment Shipment { get; set; }
 
         public int? ConsigneeStatusId { get; set; }
-        public ICollection<ConsigneeStatus> ConsigneeStatus { get; set; }
+        public virtual ConsigneeStatus ConsigneeStatus { get; set; }
+        public ICollection<ConsigneeStatusHistory> ConsigneeStatusHistories { get; set; }
     }
 }

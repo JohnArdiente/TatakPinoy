@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,16 @@ namespace TatakPinoy.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
-        public IActionResult Track(string Track)
+        public IActionResult Track(string track)
         {
-            var consignees = from c in _context.Consignee select c;
-            if (!String.IsNullOrEmpty(Track))
-            {
-                consignees = consignees.Where(x => x.TrackingNo!.Contains(Track));
-            }
-            return View(consignees.ToList());
+            var consignee = _context.Consignee
+                .Include(x => x.ConsigneeStatusHistories)
+                .ThenInclude(x => x.ConsigneeStatus)
+                .AsNoTracking()
+                .FirstOrDefault(x => x.TrackingNo == track);
+            //temp not found
+            if (consignee == null) return NotFound();
+            return View(consignee);
         }
 
         public IActionResult Privacy()

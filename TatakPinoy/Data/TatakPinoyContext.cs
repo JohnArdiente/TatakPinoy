@@ -14,15 +14,17 @@ namespace TatakPinoy.Data
         {
         }
 
-        public DbSet<TatakPinoy.Models.Shipment> Shipment { get; set; }
+        public DbSet<Shipment> Shipment { get; set; }
 
-        public DbSet<TatakPinoy.Models.Consignee> Consignee { get; set; }
+        public DbSet<Consignee> Consignee { get; set; }
 
         public DbSet<UserModel> UserModels { get; set; }
 
-        public DbSet<TatakPinoy.Models.Status> Status { get; set; }
+        public DbSet<Status> Status { get; set; }
 
-        public DbSet<TatakPinoy.Models.ConsigneeStatus> ConsigneeStatus { get; set; }
+        public DbSet<ConsigneeStatus> ConsigneeStatus { get; set; }
+
+        public DbSet<ConsigneeStatusHistory> ConsigneeStatusHistories { get; set; }
 
     }
 }

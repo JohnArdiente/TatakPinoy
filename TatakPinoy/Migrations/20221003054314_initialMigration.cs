@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TatakPinoy.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,7 @@ namespace TatakPinoy.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true)
                 },
@@ -91,7 +92,8 @@ namespace TatakPinoy.Migrations
                     ConsigneeStatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ConsigneeStatusDesc = table.Column<string>(nullable: true),
-                    ConsigneeId = table.Column<int>(nullable: true)
+                    ConsigneeId = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,7 +103,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.ConsigneeId,
                         principalTable: "Consignee",
                         principalColumn: "ConsigneeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

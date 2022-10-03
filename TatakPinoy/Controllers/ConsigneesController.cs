@@ -93,12 +93,14 @@ namespace TatakPinoy.Controllers
                 return NotFound();
             }
 
-            var consignee = await _context.Consignee.FindAsync(id);
+            var consignee = await _context.Consignee
+                .Include(x => x.ConsigneeStatus)
+                .FirstOrDefaultAsync(x => x.ConsigneeId == id);
             if (consignee == null)
             {
                 return NotFound();
             }
-            PopulateConsigneeStatusDropDownList(consignee.ConsigneeStatusId);
+            PopulateConsigneeStatusDropDownList(consignee.ConsigneeStatusId??0);
             return View(consignee);
         }
 
@@ -107,9 +109,42 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> EditPost(Consignee model)
         {
-            if (id == null)
+            if (model.ConsigneeId == 0) return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                var consignee = await _context.Consignee
+                    .Include(x => x.ConsigneeStatus)
+                    .Include(x => x.ConsigneeStatusHistories)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.ConsigneeId == model.ConsigneeId);
+
+                if ((consignee.ConsigneeStatusId != model.ConsigneeStatusId) && model.ConsigneeStatusId != null)
+                {
+                    var newHistory = new ConsigneeStatusHistory()
+                    {
+                        ConsigneeId = consignee.ConsigneeId,
+                        ConsigneeStatusId = model.ConsigneeStatusId.Value,
+                        UpdatedAt = DateTime.Now
+                    };
+                    if (consignee.ConsigneeStatusHistories != null)
+                    {
+                        consignee.ConsigneeStatusHistories = new List<ConsigneeStatusHistory> { newHistory };
+                    }
+                    else
+                    {
+                        consignee.ConsigneeStatusHistories.Add(newHistory);
+                    }
+                }
+                model.ConsigneeStatusHistories = consignee.ConsigneeStatusHistories;
+                _context.Update(model);
+                await _context.SaveChangesAsync();
+                PopulateConsigneeStatusDropDownList(model.ConsigneeStatusId);
+                return View(consignee);
+            }
+            /*if (id == null)
             {
                 return NotFound();
             }
@@ -125,7 +160,7 @@ namespace TatakPinoy.Controllers
                 {
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateException *//* ex *//*)
                 {
                     //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
@@ -133,9 +168,9 @@ namespace TatakPinoy.Controllers
                         "see your system administrator.");
                 }
                 return RedirectToAction("Index", new { shipmentid = consigneeToUpdate.ShipmentId });
-            }
-            PopulateConsigneeStatusDropDownList(consigneeToUpdate.ConsigneeStatusId);
-            return View(consigneeToUpdate);
+            }*/
+
+            return View(model);
         }
 
         // GET: Consignees/Delete/5
@@ -173,12 +208,11 @@ namespace TatakPinoy.Controllers
         {
             return _context.Consignee.Any(e => e.ConsigneeId == id);
         }
-        private void PopulateConsigneeStatusDropDownList(object selectedStatus = null)
+        private void PopulateConsigneeStatusDropDownList(int? selectedStatus = null)
         {
-            var statusQuery = from d in _context.ConsigneeStatus
-                              orderby d.ConsigneeStatusId
-                              select d;
-            ViewBag.ConsigneeStatusId = new SelectList(statusQuery, "ConsigneeStatusId", "ConsigneeStatusDesc", selectedStatus);
+            var statusQuery = _context.ConsigneeStatus.OrderBy(x => x.Id).AsNoTracking().ToList();
+            Console.WriteLine(statusQuery.Count);
+            ViewBag.ConsigneeStatusId = new SelectList(statusQuery, "Id", "ConsigneeStatusDesc", selectedStatus);
         }
     }
 }

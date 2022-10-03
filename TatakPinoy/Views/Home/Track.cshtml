@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TatakPinoy.Models.Consignee>
+﻿@model TatakPinoy.Models.Consignee
 
 @{
     ViewData["Title"] = "Index";
@@ -7,21 +7,18 @@
 <div class="container">
     <br />
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-5">
-            <form class="card card-sm">
+        <div class="col-12 col-md-10 col-lg-5 shadow-lg p-3 mb-5 bg-white rounded">
+            <form class="card card-sm" asp-controller="Home" asp-action="Track">
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col-auto">
                         <i class="fas fa-search h4 text-body"></i>
                     </div>
-                    <!--end of col-->
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Input tracking number">
+                        <input class="form-control form-control-lg form-control-borderless" type="search" name="Track" placeholder="Input tracking number" value="@Model.TrackingNo">
                     </div>
-                    <!--end of col-->
                     <div class="col-auto">
                         <button class="btn btn-lg btn-success" type="submit">Track</button>
                     </div>
-                    <!--end of col-->
                 </div>
             </form>
         </div>
@@ -35,10 +32,12 @@
     </div>
 </div>*@
 <div class="container">
-    <div class="card" style="width: 35rem;">
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 35rem;">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p style="text-align:left">DELIVERED <span style="float:right;">September 1, 2022 4:00 pm</span></p></li>
-            <li class="list-group-item"><p style="text-align:left">ONGOING DELIVERY <span style="float:right;">September 1, 2022 4:00 pm</span></p></li>
+            @foreach (var statusHistory in Model.ConsigneeStatusHistories.OrderByDescending(x => x.UpdatedAt))
+            {
+                <li class="list-group-item"><p style="text-align:left"><b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span></p></li>
+            }
 
         </ul>
     </div>

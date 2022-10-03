@@ -33,14 +33,14 @@ namespace TatakPinoy.Controllers
                 return NotFound();
             }
 
-            var consigneeStatus = await _context.ConsigneeStatus
+           /* var consigneeStatus = await _context.ConsigneeStatus
                 .FirstOrDefaultAsync(m => m.ConsigneeStatusId == id);
             if (consigneeStatus == null)
             {
                 return NotFound();
-            }
+            }*/
 
-            return View(consigneeStatus);
+            return View();
         }
 
         // GET: ConsigneeStatus/Create
@@ -88,7 +88,7 @@ namespace TatakPinoy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ConsigneeStatusId,ConsigneeStatusDesc")] ConsigneeStatus consigneeStatus)
         {
-            if (id != consigneeStatus.ConsigneeStatusId)
+            /*if (id != consigneeStatus.ConsigneeStatusId)
             {
                 return NotFound();
             }
@@ -112,8 +112,8 @@ namespace TatakPinoy.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(consigneeStatus);
+            }*/
+            return View();
         }
 
         // GET: ConsigneeStatus/Delete/5
@@ -124,14 +124,14 @@ namespace TatakPinoy.Controllers
                 return NotFound();
             }
 
-            var consigneeStatus = await _context.ConsigneeStatus
+            /*var consigneeStatus = await _context.ConsigneeStatus
                 .FirstOrDefaultAsync(m => m.ConsigneeStatusId == id);
             if (consigneeStatus == null)
             {
                 return NotFound();
-            }
+            }*/
 
-            return View(consigneeStatus);
+            return View();
         }
 
         // POST: ConsigneeStatus/Delete/5
@@ -147,7 +147,7 @@ namespace TatakPinoy.Controllers
 
         private bool ConsigneeStatusExists(int id)
         {
-            return _context.ConsigneeStatus.Any(e => e.ConsigneeStatusId == id);
+            return true; // _context.ConsigneeStatus.Any(e => e.ConsigneeStatusId == id);
         }
     }
 }

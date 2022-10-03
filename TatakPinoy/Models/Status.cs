@@ -9,7 +9,7 @@ namespace TatakPinoy.Models
     {
         public int StatusId { get; set; }
         public string StatusDesc { get; set; }
-
-        public Shipment Shipment { get; set; }
+        public int? ShipmentId { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
     }
 }
