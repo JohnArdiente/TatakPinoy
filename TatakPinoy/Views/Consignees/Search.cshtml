@@ -46,49 +46,54 @@
                     <th>
                         Pick-up Date
                     </th>
-                    <th>Actions</th>
+                    <th>
+                        Status
+                    </th>
+                    <th colspan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TrackingNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ShipersName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ShipersNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ConsigneesName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ConsigneesAddr)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ConsigneesNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qty)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AgentsName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PickupDate)
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Shipment.ShipmentId)
-                            </td>*@
-                        <td>
-                            <a class="btn btn-sm btn-outline-primary " asp-action="Edit" asp-route-id="@item.ConsigneeId"> Edit</a>
-                            @*<a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |*@
-                            <a class="btn btn-sm btn-outline-danger " asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipersName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipersNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesAddr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsigneesNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgentsName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PickupDate)
+                    </td>
+                    <td>
+                        @item.ConsigneeStatus.ConsigneeStatusDesc
+                    </td>
+                    <td>
+                        <a class="btn  btn-outline-primary " asp-action="Edit" asp-route-id="@item.ConsigneeId"> Edit   </a>
+                        @*<a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |*@
+                    </td>
+                    <td>
+                        <a class="btn  btn-outline-danger " asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

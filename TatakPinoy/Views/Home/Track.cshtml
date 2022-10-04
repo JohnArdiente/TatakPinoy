@@ -4,44 +4,76 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <br />
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <form class="card card-sm" asp-controller="Home" asp-action="Track">
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="col-auto">
-                        <i class="fas fa-search h4 text-body"></i>
+@if (Model == null)
+{
+    <div class="container">
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-5 shadow-lg p-3 mb-5 bg-white rounded">
+                <form class="card card-sm" asp-controller="Home" asp-action="Track">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <input class="form-control form-control-lg form-control-borderless" type="search" name="Track" placeholder="Input tracking number">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-lg btn-success" type="submit">Track</button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" name="Track" placeholder="Input tracking number" value="@Model.TrackingNo">
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-success" type="submit">Track</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <!--end of col-->
     </div>
-</div>
-@*<div class="form-group col-lg-4">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Track</button>
-    </div>
-</div>*@
-<div class="container">
-    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 35rem;">
-        <ul class="list-group list-group-flush">
-            @foreach (var statusHistory in Model.ConsigneeStatusHistories.OrderByDescending(x => x.UpdatedAt))
-            {
-                <li class="list-group-item"><p style="text-align:left"><b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span></p></li>
-            }
 
-        </ul>
+    <div class="container-fluid">
+        <div class="alert alert-block alert-danger">
+            <i class="ace-icon fa fa-warning red"></i>
+            <center>No Records found!</center>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="container">
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-5 shadow-lg p-3 mb-5 bg-white rounded">
+                <form class="card card-sm" asp-controller="Home" asp-action="Track">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <input class="form-control form-control-lg form-control-borderless" type="search" name="Track" placeholder="Input tracking number" value="@Model.TrackingNo">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-lg btn-success" type="submit">Track</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.NotFound != null)
+    {
+        <span class="alert alert-danger">@ViewBag.NotFound</span>
+    }
+    <div class="container">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 35rem;">
+            <ul class="list-group list-group-flush">
+                @foreach (var statusHistory in Model.ConsigneeStatusHistories.OrderByDescending(x => x.UpdatedAt))
+                {
+                    <li class="list-group-item"><p style="text-align:left"><b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span></p></li>
+                }
+
+            </ul>
+        </div>
+    </div>
+}
+
 <script>
     function viewAllClicked() {
         $('#search').val('');
@@ -50,9 +82,9 @@
 </script>
 <style>
     .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
     }
 
     .form-control-borderless {
@@ -65,4 +97,7 @@
             box-shadow: none;
         }
 
+    .container-fluid {
+        width: 30%;
+    }
 </style>

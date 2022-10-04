@@ -10,8 +10,8 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221003055757_added consigneeStatusHistoryTable")]
-    partial class addedconsigneeStatusHistoryTable
+    [Migration("20221004072914_Create new contact")]
+    partial class Createnewcontact
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +63,8 @@ namespace TatakPinoy.Migrations
 
                     b.HasKey("ConsigneeId");
 
+                    b.HasIndex("ConsigneeStatusId");
+
                     b.HasIndex("ShipmentId");
 
                     b.ToTable("Consignee");
@@ -75,15 +77,10 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ConsigneeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConsigneeStatusDesc")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ConsigneeId");
 
                     b.ToTable("ConsigneeStatus");
                 });
@@ -113,6 +110,30 @@ namespace TatakPinoy.Migrations
                     b.ToTable("ConsigneeStatusHistories");
                 });
 
+            modelBuilder.Entity("TatakPinoy.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contact");
+                });
+
             modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
                 {
                     b.Property<int>("ShipmentId")
@@ -128,8 +149,7 @@ namespace TatakPinoy.Migrations
 
                     b.HasKey("ShipmentId");
 
-                    b.HasIndex("StatusId")
-                        .IsUnique();
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Shipment");
                 });
@@ -140,6 +160,9 @@ namespace TatakPinoy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ShipmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("StatusDesc")
                         .HasColumnType("nvarchar(max)");
@@ -176,28 +199,25 @@ namespace TatakPinoy.Migrations
 
             modelBuilder.Entity("TatakPinoy.Models.Consignee", b =>
                 {
+                    b.HasOne("TatakPinoy.Models.ConsigneeStatus", "ConsigneeStatus")
+                        .WithMany()
+                        .HasForeignKey("ConsigneeStatusId");
+
                     b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
                         .WithMany("Consignees")
                         .HasForeignKey("ShipmentId");
                 });
 
-            modelBuilder.Entity("TatakPinoy.Models.ConsigneeStatus", b =>
-                {
-                    b.HasOne("TatakPinoy.Models.Consignee", null)
-                        .WithMany("ConsigneeStatus")
-                        .HasForeignKey("ConsigneeId");
-                });
-
             modelBuilder.Entity("TatakPinoy.Models.ConsigneeStatusHistory", b =>
                 {
                     b.HasOne("TatakPinoy.Models.Consignee", "Consignee")
-                        .WithMany()
+                        .WithMany("ConsigneeStatusHistories")
                         .HasForeignKey("ConsigneeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TatakPinoy.Models.ConsigneeStatus", "ConsigneeStatus")
-                        .WithMany()
+                        .WithMany("ConsigneeStatusHistories")
                         .HasForeignKey("ConsigneeStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -206,8 +226,8 @@ namespace TatakPinoy.Migrations
             modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>
                 {
                     b.HasOne("TatakPinoy.Models.Status", "Status")
-                        .WithOne("Shipment")
-                        .HasForeignKey("TatakPinoy.Models.Shipment", "StatusId")
+                        .WithMany("Shipment")
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

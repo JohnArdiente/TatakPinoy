@@ -3,17 +3,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TatakPinoy.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ConsigneeStatus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ConsigneeStatusDesc = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConsigneeStatus", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Status",
                 columns: table => new
                 {
                     StatusId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusDesc = table.Column<string>(nullable: true)
+                    StatusDesc = table.Column<string>(nullable: true),
+                    ShipmentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,6 +92,12 @@ namespace TatakPinoy.Migrations
                 {
                     table.PrimaryKey("PK_Consignee", x => x.ConsigneeId);
                     table.ForeignKey(
+                        name: "FK_Consignee_ConsigneeStatus_ConsigneeStatusId",
+                        column: x => x.ConsigneeStatusId,
+                        principalTable: "ConsigneeStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Consignee_Shipment_ShipmentId",
                         column: x => x.ShipmentId,
                         principalTable: "Shipment",
@@ -86,25 +106,36 @@ namespace TatakPinoy.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConsigneeStatus",
+                name: "ConsigneeStatusHistories",
                 columns: table => new
                 {
-                    ConsigneeStatusId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ConsigneeStatusDesc = table.Column<string>(nullable: true),
+                    ConsigneeStatusId = table.Column<int>(nullable: false),
                     ConsigneeId = table.Column<int>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConsigneeStatus", x => x.ConsigneeStatusId);
+                    table.PrimaryKey("PK_ConsigneeStatusHistories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConsigneeStatus_Consignee_ConsigneeId",
+                        name: "FK_ConsigneeStatusHistories_Consignee_ConsigneeId",
                         column: x => x.ConsigneeId,
                         principalTable: "Consignee",
                         principalColumn: "ConsigneeId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ConsigneeStatusHistories_ConsigneeStatus_ConsigneeStatusId",
+                        column: x => x.ConsigneeStatusId,
+                        principalTable: "ConsigneeStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consignee_ConsigneeStatusId",
+                table: "Consignee",
+                column: "ConsigneeStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consignee_ShipmentId",
@@ -112,27 +143,34 @@ namespace TatakPinoy.Migrations
                 column: "ShipmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConsigneeStatus_ConsigneeId",
-                table: "ConsigneeStatus",
+                name: "IX_ConsigneeStatusHistories_ConsigneeId",
+                table: "ConsigneeStatusHistories",
                 column: "ConsigneeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConsigneeStatusHistories_ConsigneeStatusId",
+                table: "ConsigneeStatusHistories",
+                column: "ConsigneeStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shipment_StatusId",
                 table: "Shipment",
-                column: "StatusId",
-                unique: true);
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ConsigneeStatus");
+                name: "ConsigneeStatusHistories");
 
             migrationBuilder.DropTable(
                 name: "UserModels");
 
             migrationBuilder.DropTable(
                 name: "Consignee");
+
+            migrationBuilder.DropTable(
+                name: "ConsigneeStatus");
 
             migrationBuilder.DropTable(
                 name: "Shipment");

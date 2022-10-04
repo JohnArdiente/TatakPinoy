@@ -24,16 +24,15 @@ namespace TatakPinoy.Controllers
         [Authorize]
         public async Task<IActionResult> Index(string searchString)
         {
-            /*var shipments = await _context.Shipment
-           .Include(c => c.Consignees)
-           .ToListAsync();*/
-            /*var shipments = from s in _context.Shipment select s;
-            if(!String.IsNullOrEmpty(searchString))
-            {
-                shipments = shipments.Where(x => x.ShipmentNo!.Contains(searchString));
-            }*/
+            var shipments = from m in _context.Shipment
+                         select m;
 
-            return View(await _context.Shipment.Include(x=>x.Status).ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                shipments = shipments.Where(s => s.ShipmentNo!.Contains(searchString));
+            }
+
+            return View(await shipments.Include(x=>x.Status).ToListAsync());
         }
 
         // GET: Shipments/Details/5

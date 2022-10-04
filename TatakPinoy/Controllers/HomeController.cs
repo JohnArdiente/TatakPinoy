@@ -43,7 +43,10 @@ namespace TatakPinoy.Controllers
                 .AsNoTracking()
                 .FirstOrDefault(x => x.TrackingNo == track);
             //temp not found
-            if (consignee == null) return NotFound();
+            if (consignee == null)
+            {
+                ViewBag.NotFound = "Record's Not Found!";
+            }
             return View(consignee);
         }
 

@@ -182,6 +182,7 @@
                                 <div class="info-box mt-4">
                                     <i class="bx bx-envelope"></i>
                                     <h3>Email Us</h3>
+                                    <p>tatakpinoyusa@gmail.com</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -196,7 +197,7 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form asp-controller="COntacts" asp-action="Create" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col form-group">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>

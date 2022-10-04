@@ -6,9 +6,6 @@
 }
 
 <div class="container">
-
-    <h4>Create Consignee Status</h4>
-
     <p>
         <a asp-action="Create" class="btn btn-outline-success">Create New</a>
     </p>
@@ -16,7 +13,7 @@
         <thead>
             <tr>
                 <th>
-                   Consignee Status Description
+                   Status
                 </th>
                 <th></th>
             </tr>
@@ -29,9 +26,9 @@
                         @Html.DisplayFor(modelItem => item.ConsigneeStatusDesc) 
                     </td>
                     <td>
-                        @*<a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@item.ConsigneeStatusId">Edit</a>
+                        <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@item.Id">Edit</a>
 
-                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.ConsigneeStatusId">Delete</a>*@
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }

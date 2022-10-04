@@ -26,5 +26,7 @@ namespace TatakPinoy.Data
 
         public DbSet<ConsigneeStatusHistory> ConsigneeStatusHistories { get; set; }
 
+        public DbSet<TatakPinoy.Models.Contact> Contact { get; set; }
+
     }
 }

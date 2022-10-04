@@ -37,7 +37,7 @@ namespace TatakPinoy.Controllers
                 consignees = consignees.Where(x => x.TrackingNo!.Contains(searchString));
             }
 
-            return View(await consignees.ToListAsync());
+            return View(await consignees.Include(x=>x.ConsigneeStatus).ToListAsync());
         }
 
         // GET: Consignees/Details/5
