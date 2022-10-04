@@ -10,7 +10,7 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221004025724_InitialCreate")]
+    [Migration("20221004141120_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("AgentsName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BackloadReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ConsigneeStatusId")
                         .HasColumnType("int");
 
@@ -43,11 +46,17 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ConsigneesNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("PickupDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Qty")
                         .HasColumnType("int");
+
+                    b.Property<string>("RecievedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipersName")
                         .HasColumnType("nvarchar(max)");
@@ -108,6 +117,30 @@ namespace TatakPinoy.Migrations
                     b.HasIndex("ConsigneeStatusId");
 
                     b.ToTable("ConsigneeStatusHistories");
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.Shipment", b =>

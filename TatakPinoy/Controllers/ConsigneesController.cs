@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,7 @@ namespace TatakPinoy.Controllers
         {
             ViewBag.ShipmentId = shipmentid;
             var tatakPinoyContext = _context.Consignee.Include(x=>x.Shipment).Include(x=>x.ConsigneeStatus).Where(x=>x.ShipmentId == shipmentid);
-
-
+            //tatakPinoyContext.FirstOrDefault().PickupDate = DateTime.Parse(tatakPinoyContext.FirstOrDefault().PickupDate.ToString("MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
             return View(await tatakPinoyContext.ToListAsync());
         }
 

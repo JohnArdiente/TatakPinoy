@@ -9,7 +9,7 @@
 <div class="container">
     <h4>Box Details</h4>
     <hr />
-    <form asp-action="Edit">
+    <form asp-action="Edit" name="2">
         <div class="row">
             <div class="col-md-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -69,9 +69,14 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Status</label>
-                    <select class="form-control select2" asp-for="ConsigneeStatusId" asp-items="ViewBag.ConsigneeStatusId">
+                    <select class="form-control select2" asp-for="ConsigneeStatusId" asp-items="ViewBag.ConsigneeStatusId" onchange="if (this.value=='2'){this.form['13'].style.visibility='visible'}else {this.form['13'].style.visibility='hidden'};">
                         <option value="">Select Consignee status</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Contact Number</label>
+                    <input asp-for="RecievedBy" class="form-control" name="2" />
+                    <span asp-validation-for="RecievedBy" class="text-danger"></span>
                 </div>
             </div>
         </div>

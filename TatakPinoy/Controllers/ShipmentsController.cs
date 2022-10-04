@@ -21,7 +21,6 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: Shipments
-        [Authorize]
         public async Task<IActionResult> Index(string searchString)
         {
             var shipments = from m in _context.Shipment
@@ -33,6 +32,20 @@ namespace TatakPinoy.Controllers
             }
 
             return View(await shipments.Include(x=>x.Status).ToListAsync());
+        }
+
+        // GET: Shipments
+        public async Task<IActionResult> Update(string searchString)
+        {
+            var shipments = from m in _context.Shipment
+                            select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                shipments = shipments.Where(s => s.ShipmentNo!.Contains(searchString));
+            }
+
+            return View(await shipments.Include(x => x.Status).ToListAsync());
         }
 
         // GET: Shipments/Details/5

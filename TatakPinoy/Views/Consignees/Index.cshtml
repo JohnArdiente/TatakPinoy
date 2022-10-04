@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<TatakPinoy.Models.Consignee>
-
+@using System.Globalization 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -83,7 +83,7 @@
                                 @Html.DisplayFor(modelItem => item.AgentsName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PickupDate)
+                                @Html.DisplayFor(model => item.PickupDate)
                             </td>
                             <td>
                                 @item.ConsigneeStatus?.ConsigneeStatusDesc

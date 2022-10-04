@@ -21,6 +21,22 @@ namespace TatakPinoy.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Subject = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Status",
                 columns: table => new
                 {
@@ -85,6 +101,9 @@ namespace TatakPinoy.Migrations
                     Qty = table.Column<int>(nullable: false),
                     AgentsName = table.Column<string>(nullable: true),
                     PickupDate = table.Column<DateTime>(nullable: false),
+                    RecievedBy = table.Column<string>(nullable: true),
+                    DeliveryDate = table.Column<DateTime>(nullable: true),
+                    BackloadReason = table.Column<string>(nullable: true),
                     ShipmentId = table.Column<int>(nullable: true),
                     ConsigneeStatusId = table.Column<int>(nullable: true)
                 },
@@ -162,6 +181,9 @@ namespace TatakPinoy.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ConsigneeStatusHistories");
+
+            migrationBuilder.DropTable(
+                name: "Contact");
 
             migrationBuilder.DropTable(
                 name: "UserModels");

@@ -54,14 +54,17 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
-
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>
+                        <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+                        @*<li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>*@
+                        <li class="dropdown">
+                            <a href="#"><span>Shipments</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li><a class="dropdown-item" asp-controller="Shipments" asp-action="Create">New Shipment</a></li>
+                                <li><a class="dropdown-item" asp-controller="Shipments" asp-action="Update">Update Shipment</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#"><span>Master Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
@@ -69,6 +72,13 @@
                                 <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
                             </ul>
                         </li>
+                    }
+                    else
+                    {
+                        <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                        <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
+                        <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
                     }
 
                     @*        <div class="dropdown">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +17,12 @@ namespace TatakPinoy.Models
         public string ConsigneesNo { get; set; }
         public int Qty { get; set; }
         public string AgentsName { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime PickupDate { get; set; }
+        public string? RecievedBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime? DeliveryDate { get; set; }
+        public string? BackloadReason { get; set; }
 
         public int? ShipmentId { get; set; }
         public Shipment Shipment { get; set; }

@@ -29,6 +29,9 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("AgentsName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BackloadReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ConsigneeStatusId")
                         .HasColumnType("int");
 
@@ -41,11 +44,17 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ConsigneesNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("PickupDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Qty")
                         .HasColumnType("int");
+
+                    b.Property<string>("RecievedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipersName")
                         .HasColumnType("nvarchar(max)");
