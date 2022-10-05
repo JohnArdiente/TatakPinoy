@@ -62,7 +62,7 @@ namespace TatakPinoy.Controllers
                 await _context.SaveChangesAsync();
                 return View("~/Views/Home/Index.cshtml");
             }
-            return View(contact);
+            return Ok();
         }
 
         // GET: Contacts/Edit/5
