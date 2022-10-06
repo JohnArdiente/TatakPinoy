@@ -190,7 +190,8 @@
 
                     <div class="col-lg-6">
                         <div class="well well-sm">
-                            <form asp-controller="Contacts" asp-action="Create" method="post" >
+                            <form asp-controller="Contacts" asp-action="Create" method="post" id="message_form">
+                                <input name="subject" value="" type="hidden" />
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -221,7 +222,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                        <button type="button" class="btn btn-primary pull-right" id="btnContactUs">
                                             Send Message
                                         </button>
                                     </div>
@@ -229,11 +230,10 @@
                             </form>
                         </div>
                     </div>
-                    </div>
-
                 </div>
 
             </div>
+
         </section><!-- End Contact Section -->
 
         <div class="section-title">
@@ -257,27 +257,25 @@
 
     <!-- Template Main JS File -->
     <script src="~/portfolio_boostrap/js/main.js"></script>
+    <script>
+        $("#btnContactUs").click(function () {
+            var form = $('#message_form');
+            console.log(form.serialize());
+            $.ajax({
+                url: '@Url.Action("Create","Contacts")',
+                type: 'POST',
+                async: true,
+                data: form.serialize(),
+                success: function (form) {
+                    alert("Successfully Added");
+                },
+                error(result) {
+                    console.log(result);
+                }
+            });
+        });
+    </script>
 
 </body>
 
 </html>
-
-    <script>
-    $("#btnContactUs").click(function() {
-        var Name = $("#name").val();
-        var Email = $("#email").val();
-        var Subject = $("#subject").val();
-        var Message = $("#message").val();
-        var dataString = 'name=' + Name + '&email=' + Email + '&message=' + Message;
-        $.ajax({
-            type: 'POST',
-            data: dataString,
-            url: '@Url.Action("Create","Contacts")',
-            success: function (data) {
-                alert("Successfully Added");
-            }
-        });
-    });
-
-    
-    </script>

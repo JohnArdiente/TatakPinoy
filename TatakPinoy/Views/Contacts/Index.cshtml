@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div>
-    <table class="table">
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <table class="table" style="">
         <thead>
             <tr>
                 <th>
@@ -20,9 +20,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
-                <th style="width:10px">
+                <th >
                     @Html.DisplayNameFor(model => model.Message)
                 </th>
+                <th>sample</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,21 +36,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td style="width:10px">
-                    @Html.DisplayFor(modelItem => item.Message)
+                <td style="width: 150px !important;">
+                    <span style="word-break: break-word !important;">
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </span>
                 </td>
+                <td>sample</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
     }
         </tbody>
     </table>
 </div>
-<style>
-        .container-fluid {
-            width: 85%;
-        }
-    </style>
+
