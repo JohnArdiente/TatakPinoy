@@ -10,7 +10,7 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221004141120_InitialCreate")]
+    [Migration("20221006053225_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,6 +92,43 @@ namespace TatakPinoy.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ConsigneeStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConsigneeStatusDesc = "ARRIVED AT MANILA WH AND SCHEDULED FOR DELIVERY"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConsigneeStatusDesc = "ARRIVED AT CEBU WH AND SCHEDULED FOR DELIVERY "
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConsigneeStatusDesc = "IN TRANSIT TO CEBU WH"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConsigneeStatusDesc = "IN TRANSIT TO MANILA WH"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConsigneeStatusDesc = "ONGOING DELIVERY "
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ConsigneeStatusDesc = "BACKLOADED (REASON/EXCEPTION)"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ConsigneeStatusDesc = "DELIVERED"
+                        });
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.ConsigneeStatusHistory", b =>
@@ -179,6 +216,38 @@ namespace TatakPinoy.Migrations
                     b.HasKey("StatusId");
 
                     b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 1,
+                            StatusDesc = "EDA AT MANILA PORT IS ON"
+                        },
+                        new
+                        {
+                            StatusId = 2,
+                            StatusDesc = "ETA AT CEBU PORT IS ON"
+                        },
+                        new
+                        {
+                            StatusId = 3,
+                            StatusDesc = "VESSEL DELAYED NEW EDA IS ON"
+                        },
+                        new
+                        {
+                            StatusId = 4,
+                            StatusDesc = "ARRIVED AT PHILIPPINE PORT AND ONGOING CUSTOMS CLEARING"
+                        },
+                        new
+                        {
+                            StatusId = 5,
+                            StatusDesc = "RELEASED FROM PHILIPPINE CUSTOMS"
+                        },
+                        new
+                        {
+                            StatusId = 6,
+                            StatusDesc = "UNLOADED AT LOCAL WH"
+                        });
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.UserModel", b =>

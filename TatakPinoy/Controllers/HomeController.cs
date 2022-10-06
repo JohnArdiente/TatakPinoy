@@ -40,6 +40,7 @@ namespace TatakPinoy.Controllers
             var consignee = _context.Consignee
                 .Include(x => x.ConsigneeStatusHistories)
                 .ThenInclude(x => x.ConsigneeStatus)
+                .Include(x=>x.Shipment).ThenInclude(x=>x.Status)
                 .AsNoTracking()
                 .FirstOrDefault(x => x.TrackingNo == track);
             //temp not found

@@ -151,6 +151,33 @@ namespace TatakPinoy.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "ConsigneeStatus",
+                columns: new[] { "Id", "ConsigneeStatusDesc" },
+                values: new object[,]
+                {
+                    { 1, "ARRIVED AT MANILA WH AND SCHEDULED FOR DELIVERY" },
+                    { 2, "ARRIVED AT CEBU WH AND SCHEDULED FOR DELIVERY " },
+                    { 3, "IN TRANSIT TO CEBU WH" },
+                    { 4, "IN TRANSIT TO MANILA WH" },
+                    { 5, "ONGOING DELIVERY " },
+                    { 6, "BACKLOADED (REASON/EXCEPTION)" },
+                    { 7, "DELIVERED" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "StatusId", "ShipmentId", "StatusDesc" },
+                values: new object[,]
+                {
+                    { 1, null, "EDA AT MANILA PORT IS ON" },
+                    { 2, null, "ETA AT CEBU PORT IS ON" },
+                    { 3, null, "VESSEL DELAYED NEW EDA IS ON" },
+                    { 4, null, "ARRIVED AT PHILIPPINE PORT AND ONGOING CUSTOMS CLEARING" },
+                    { 5, null, "RELEASED FROM PHILIPPINE CUSTOMS" },
+                    { 6, null, "UNLOADED AT LOCAL WH" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Consignee_ConsigneeStatusId",
                 table: "Consignee",

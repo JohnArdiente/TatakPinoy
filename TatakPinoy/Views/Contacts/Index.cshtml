@@ -10,8 +10,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<div class="container">
-    <table class="table" style='table-layout:fixed'>
+<div>
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -20,7 +20,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
-                <th>
+                <th style="width:10px">
                     @Html.DisplayNameFor(model => model.Message)
                 </th>
                 <th></th>
@@ -35,7 +35,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td style="width:80px">
+                <td style="width:10px">
                     @Html.DisplayFor(modelItem => item.Message)
                 </td>
                 <td>
@@ -52,5 +52,4 @@
         .container-fluid {
             width: 85%;
         }
-        td {overflow:hidden;}
     </style>

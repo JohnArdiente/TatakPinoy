@@ -86,9 +86,9 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsigneeStatusId,ConsigneeStatusDesc")] ConsigneeStatus consigneeStatus)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ConsigneeStatusDesc")] ConsigneeStatus consigneeStatus)
         {
-            /*if (id != consigneeStatus.ConsigneeStatusId)
+            if (id != consigneeStatus.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace TatakPinoy.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConsigneeStatusExists(consigneeStatus.ConsigneeStatusId))
+                    if (!ConsigneeStatusExists(consigneeStatus.Id))
                     {
                         return NotFound();
                     }
@@ -112,34 +112,14 @@ namespace TatakPinoy.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }*/
-            return View();
-        }
-
-        // GET: ConsigneeStatus/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
             }
-
-            /*var consigneeStatus = await _context.ConsigneeStatus
-                .FirstOrDefaultAsync(m => m.ConsigneeStatusId == id);
-            if (consigneeStatus == null)
-            {
-                return NotFound();
-            }*/
-
             return View();
         }
 
         // POST: ConsigneeStatus/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var consigneeStatus = await _context.ConsigneeStatus.FindAsync(id);
+            var consigneeStatus = await _context.ConsigneeStatus.Where(x => x.Id == id).FirstOrDefaultAsync();
             _context.ConsigneeStatus.Remove(consigneeStatus);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -147,7 +127,7 @@ namespace TatakPinoy.Controllers
 
         private bool ConsigneeStatusExists(int id)
         {
-            return true; // _context.ConsigneeStatus.Any(e => e.ConsigneeStatusId == id);
+           return _context.ConsigneeStatus.Any(e => e.Id == id);
         }
     }
 }

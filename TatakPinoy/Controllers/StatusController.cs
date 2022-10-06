@@ -116,30 +116,10 @@ namespace TatakPinoy.Controllers
             return View(status);
         }
 
-        // GET: Status/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var status = await _context.Status
-                .FirstOrDefaultAsync(m => m.StatusId == id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            return View(status);
-        }
-
         // POST: Status/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var status = await _context.Status.FindAsync(id);
+            var status = await _context.Status.Where(x => x.StatusId == id).FirstOrDefaultAsync();
             _context.Status.Remove(status);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

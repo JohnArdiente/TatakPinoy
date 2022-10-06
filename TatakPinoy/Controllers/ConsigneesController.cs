@@ -173,7 +173,7 @@ namespace TatakPinoy.Controllers
             return View(model);
         }
 
-        // GET: Consignees/Delete/5
+ /*       // GET: Consignees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -190,14 +190,14 @@ namespace TatakPinoy.Controllers
             }
 
             return View(consignee);
-        }
+        }*/
 
         // POST: Consignees/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /*[HttpPost, ActionName("Delete")]*/
+        /*[ValidateAntiForgeryToken]*/
+        public async Task<IActionResult> Delete(int id)
         {
-            var consignee = await _context.Consignee.FindAsync(id);
+            var consignee = await _context.Consignee.Where(x => x.ConsigneeId == id).FirstOrDefaultAsync();
             _context.Consignee.Remove(consignee);
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));

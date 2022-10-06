@@ -82,7 +82,7 @@ namespace TatakPinoy.Controllers
         {
             if (ModelState.IsValid)
             {
-                shipment.StatusId = 2;
+                shipment.StatusId = 1;
                 _context.Add(shipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
