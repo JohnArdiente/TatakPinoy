@@ -268,6 +268,8 @@
                 data: form.serialize(),
                 success: function (form) {
                     alert("Successfully Added");
+                    $('input[type="text"],textarea').val('');
+                    $('input[type="email"]').val('');
                 },
                 error(result) {
                     console.log(result);

@@ -23,7 +23,6 @@
                 <th >
                     @Html.DisplayNameFor(model => model.Message)
                 </th>
-                <th>sample</th>
                 <th></th>
             </tr>
         </thead>
@@ -36,15 +35,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td style="width: 150px !important;">
+                <td style="width: 350px !important;">
                     <span style="word-break: break-word !important;">
                         @Html.DisplayFor(modelItem => item.Message)
                     </span>
                 </td>
-                <td>sample</td>
                 <td>
                     <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-outline-danger" href="@Url.Action("Delete","Contacts", new { id =  item.Id })", onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
                 </td>
             </tr>
     }
