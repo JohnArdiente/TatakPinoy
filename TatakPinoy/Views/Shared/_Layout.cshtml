@@ -57,7 +57,6 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
-                        @*<li><a class="nav-link scrollto" asp-controller="Shipments" asp-action="Index">Shipments</a></li>*@
                         <li class="dropdown">
                             <a href="#"><span>Shipments</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
@@ -72,10 +71,11 @@
                                 <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
                             </ul>
                         </li>
+                        <li><a class="nav-link scrollto" asp-controller="Messages" asp-action="Index">Messages</a></li>
                     }
                     else
                     {
-                        <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
@@ -117,7 +117,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - TatakPinoy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - TatakPinoy
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

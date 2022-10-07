@@ -49,5 +49,7 @@ namespace TatakPinoy.Data
             );
         }
 
+        public DbSet<TatakPinoy.Models.Message> Message { get; set; }
+
     }
 }

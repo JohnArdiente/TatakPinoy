@@ -10,8 +10,7 @@
     <form asp-controller="Shipments" asp-action="Index" id="search_form" method="get">
         <div class="col-md-6">  <input class="form-control" type="text" name="SearchString" placeholder="Search" aria-label="Search"></div>
         <br />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button>&nbsp;<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="viewAllClicked();">View All</button>
-        @*<a class="btn btn-outline-success my-2 my-sm-0 bx-pull-right" asp-action="Create">New Shipment</a>*@
+        <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button>&nbsp;<button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button" onclick="viewAllClicked();">View All</button>
     </form>
 
 
@@ -42,10 +41,8 @@
                             @item.Status.StatusDesc
                         </td>
                         <td>
-                            @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-outline-success my-2 my-sm-0" })
-                            @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-outline-success my-2 my-sm-0" })
-                            @*<a asp-action="Edit" asp-route-id="@item.ShipmentId">Edit</a> |*@
-                            @*<a asp-action="Delete" asp-route-id="@item.ShipmentId">Delete</a>*@
+                            @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
+                            @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
                         </td>
                     </tr>
                 }
