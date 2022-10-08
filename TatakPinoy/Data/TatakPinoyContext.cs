@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TatakPinoy.Models;
 
 namespace TatakPinoy.Data
 {
-    public class TatakPinoyContext : DbContext
+    public class TatakPinoyContext : IdentityDbContext
     {
         public TatakPinoyContext (DbContextOptions<TatakPinoyContext> options)
             : base(options)
@@ -28,8 +29,11 @@ namespace TatakPinoy.Data
 
         public DbSet<TatakPinoy.Models.Contact> Contact { get; set; }
 
+        public DbSet<TatakPinoy.Models.Message> Message { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Status>().HasData(
                     new Status { StatusId = 1, StatusDesc = "EDA AT MANILA PORT IS ON", ShipmentId = null },
                     new Status { StatusId = 2, StatusDesc = "ETA AT CEBU PORT IS ON", ShipmentId = null },
@@ -47,9 +51,16 @@ namespace TatakPinoy.Data
                     new ConsigneeStatus { Id = 6, ConsigneeStatusDesc = "BACKLOADED (REASON/EXCEPTION)" },
                     new ConsigneeStatus { Id = 7, ConsigneeStatusDesc = "DELIVERED" }
             );
+
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
         }
 
-        public DbSet<TatakPinoy.Models.Message> Message { get; set; }
+        
 
     }
 }

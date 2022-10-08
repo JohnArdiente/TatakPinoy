@@ -1,0 +1,33 @@
+﻿@model CreateRoleViewModel
+
+<div class="container-fluid">
+    <h4>Create new Role</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Role Name</label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Create Role" class="btn btn-sm btn-outline-success" />
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div>
+    </div>
+</div>
+<style>
+    .container-fluid {
+        width: 65%;
+    }
+</style>

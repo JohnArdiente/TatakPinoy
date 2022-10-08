@@ -1,5 +1,5 @@
-﻿<!-- Favicons -->
-
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 <link href="~/portfolio_boostrap/img/TatakPinoyLogoS.png" rel="icon">
 <link href="~/portfolio_boostrap/img/TatakPinoyLogoS.png" rel="apple-touch-icon">
 
@@ -48,13 +48,13 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
-            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"><a >TatakPinoy</a></h1>
+            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li class="dropdown">
@@ -72,6 +72,38 @@
                             </ul>
                         </li>
                         <li><a class="nav-link scrollto" asp-controller="Messages" asp-action="Index">Messages</a></li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="#"><span>Manage</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                <ul>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users</a>
+                                    </li>
+                                    <li><a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                       @* <li class="nav-link scrollto">
+                            <form method="post" asp-controller="account" asp-action="logout">
+                                <button type="submit" style="width:auto"
+                                    class="nav-link btn btn-link py-0">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>*@
+
+                        <li class="dropdown">
+                            <a href="#"><span>@User.Identity.Name</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li>
+                                    <form method="post" asp-controller="account" asp-action="logout" id="logout-form">
+                                        <a class="nav-link scrollto" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     }
                     else
                     {
@@ -79,26 +111,17 @@
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" asp-controller="account" asp-action="register">
+                                Register
+                            </a>
+                        </li>
+                        <li class="nav-link scrollto">
+                            <a class="nav-link" asp-controller="account" asp-action="login">
+                                Login
+                            </a>
+                        </li>
                     }
-
-                    @*        <div class="dropdown">
-            <a class="nav-link scrollto" href="#contact">Master Data</a></li>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" asp-controller="Status" asp-action="Index">Status</a></li>
-                <li><a class="dropdown-item" asp-controller="ConsigneeStatus" asp-action="Index">Consignee's Status</a></li>
-            </ul>
-        </div>*@
-
-                    <li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a asp-controller="Account" asp-action="Logout">Logout</a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Account" asp-action="Login">Login</a>
-                        }
-                    </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -121,6 +144,10 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

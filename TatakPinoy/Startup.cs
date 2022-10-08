@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TatakPinoy.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 namespace TatakPinoy
 {
@@ -30,8 +31,16 @@ namespace TatakPinoy
 
             services.AddDbContext<TatakPinoyContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TatakPinoyContext")));
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(x => x.LoginPath = "/account/login");
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            })
+                .AddEntityFrameworkStores<TatakPinoyContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
