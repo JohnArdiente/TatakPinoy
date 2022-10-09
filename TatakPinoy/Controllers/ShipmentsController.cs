@@ -11,8 +11,10 @@ using TatakPinoy.Models;
 
 namespace TatakPinoy.Controllers
 {
+    [Authorize]
     public class ShipmentsController : Controller
     {
+        
         private readonly TatakPinoyContext _context;
 
         public ShipmentsController(TatakPinoyContext context)
@@ -45,7 +47,7 @@ namespace TatakPinoy.Controllers
                 shipments = shipments.Where(s => s.ShipmentNo!.Contains(searchString));
             }
 
-            return View(await shipments.Include(x => x.Status).ToListAsync());
+            return View(await shipments.Include(x => x.ShipmentStatusHistory).ToListAsync());
         }
 
         // GET: Shipments/Details/5
@@ -98,12 +100,14 @@ namespace TatakPinoy.Controllers
                 return NotFound();
             }
 
-            var shipment = await _context.Shipment.FindAsync(id);
+            var shipment = await _context.Shipment
+                .Include(x => x.Status).ThenInclude(x=>x.ShipmentStatusHistory)
+                .FirstOrDefaultAsync(x => x.ShipmentId == id);
             if (shipment == null)
             {
                 return NotFound();
             }
-            PopulateStatusDropDownList(shipment.StatusId);
+            PopulateStatusDropDownList(shipment.StatusId??0);
             return View(shipment);
         }
 
@@ -112,35 +116,44 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> EditPost(Shipment model)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (model.ShipmentId == 0) return NotFound();
 
-            var shipmentToUpdate = await _context.Shipment
-                .FirstOrDefaultAsync(c => c.ShipmentId == id);
-
-            if (await TryUpdateModelAsync<Shipment>(shipmentToUpdate,
-                "",
-                c => c.ShipmentNo, c => c.StatusId))
+            if (ModelState.IsValid)
             {
-                try
+                var shipment = await _context.Shipment
+                    .Include(x => x.Status)
+                    .Include(x => x.ShipmentStatusHistory)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.ShipmentId == model.ShipmentId);
+
+                if ((shipment.StatusId != model.StatusId) && model.StatusId != null)
                 {
-                    await _context.SaveChangesAsync();
+                    DateTime date = model.DateOn;
+                    var newHistory = new ShipmentStatusHistory()
+                    {
+                        ShipmentId = shipment.ShipmentId,
+                        StatusId = model.StatusId.Value,
+                        UpdatedAt = DateTime.Now,
+                        DateOn = date
+                    };
+                    if (shipment.ShipmentStatusHistory != null)
+                    {
+                        shipment.ShipmentStatusHistory = new List<ShipmentStatusHistory> { newHistory };
+                    }
+                    else
+                    {
+                        shipment.ShipmentStatusHistory.Add(newHistory);
+                    }
                 }
-                catch (DbUpdateException /* ex */)
-                {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-                }
-                return RedirectToAction(nameof(Index));
+                model.ShipmentStatusHistory = shipment.ShipmentStatusHistory;
+                _context.Update(model);
+                await _context.SaveChangesAsync();
+                PopulateStatusDropDownList(model.StatusId);
+                return RedirectToAction("Update", "Shipments");
             }
-            PopulateStatusDropDownList(shipmentToUpdate.StatusId);
-            return View(shipmentToUpdate);
+            return View(model);
         }
 
         // GET: Shipments/Delete/5

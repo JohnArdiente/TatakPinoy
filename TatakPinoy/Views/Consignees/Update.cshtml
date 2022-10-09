@@ -1,4 +1,4 @@
-﻿@model List<TatakPinoy.Models.Shipment>
+﻿@model List<TatakPinoy.Models.Consignee>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,9 +6,9 @@
 }
 
 <div class="container">
-    <h4>Update Shipment</h4>
+    <h4>Update Tracking</h4>
     <hr />
-    <form asp-controller="Shipments" asp-action="Index" id="search_form" method="get">
+    <form asp-controller="Consignees" asp-action="Search" id="search_form" method="get">
         <div class="col-md-6">  <input class="form-control" type="text" name="SearchString" placeholder="Search" aria-label="Search"></div>
         <br />
         <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button>&nbsp;<button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button" onclick="viewAllClicked();">View All</button>

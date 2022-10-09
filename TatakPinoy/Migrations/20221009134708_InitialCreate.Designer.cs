@@ -10,8 +10,8 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221008080128_restrictdelete")]
-    partial class restrictdelete
+    [Migration("20221009134708_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -293,36 +293,31 @@ namespace TatakPinoy.Migrations
                         new
                         {
                             Id = 1,
-                            ConsigneeStatusDesc = "ARRIVED AT MANILA WH AND SCHEDULED FOR DELIVERY"
+                            ConsigneeStatusDesc = "SCHEDULE FOR DELIVERY"
                         },
                         new
                         {
                             Id = 2,
-                            ConsigneeStatusDesc = "ARRIVED AT CEBU WH AND SCHEDULED FOR DELIVERY "
-                        },
-                        new
-                        {
-                            Id = 3,
                             ConsigneeStatusDesc = "IN TRANSIT TO CEBU WH"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             ConsigneeStatusDesc = "IN TRANSIT TO MANILA WH"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             ConsigneeStatusDesc = "ONGOING DELIVERY "
                         },
                         new
                         {
-                            Id = 6,
-                            ConsigneeStatusDesc = "BACKLOADED (REASON/EXCEPTION)"
+                            Id = 5,
+                            ConsigneeStatusDesc = "BACKLOADED"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 6,
                             ConsigneeStatusDesc = "DELIVERED"
                         });
                 });
@@ -407,10 +402,13 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ShipmentNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("ShipmentId");
@@ -418,6 +416,34 @@ namespace TatakPinoy.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("Shipment");
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.ShipmentStatusHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ShipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShipmentId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("ShipmentStatusHistory");
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.Status", b =>
@@ -441,27 +467,27 @@ namespace TatakPinoy.Migrations
                         new
                         {
                             StatusId = 1,
-                            StatusDesc = "EDA AT MANILA PORT IS ON"
+                            StatusDesc = "EDA AT MANILA PORT IS"
                         },
                         new
                         {
                             StatusId = 2,
-                            StatusDesc = "ETA AT CEBU PORT IS ON"
+                            StatusDesc = "EDA AT CEBU PORT IS"
                         },
                         new
                         {
                             StatusId = 3,
-                            StatusDesc = "VESSEL DELAYED NEW EDA IS ON"
+                            StatusDesc = "VESSEL DELAYED NEW EDA IS"
                         },
                         new
                         {
                             StatusId = 4,
-                            StatusDesc = "ARRIVED AT PHILIPPINE PORT AND ONGOING CUSTOMS CLEARING"
+                            StatusDesc = "ARRIVED AT PHILIPPINE PORT"
                         },
                         new
                         {
                             StatusId = 5,
-                            StatusDesc = "RELEASED FROM PHILIPPINE CUSTOMS"
+                            StatusDesc = "ONGOING CUSTOMS CLEARING"
                         },
                         new
                         {
@@ -578,6 +604,20 @@ namespace TatakPinoy.Migrations
                 {
                     b.HasOne("TatakPinoy.Models.Status", "Status")
                         .WithMany("Shipment")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TatakPinoy.Models.ShipmentStatusHistory", b =>
+                {
+                    b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
+                        .WithMany("ShipmentStatusHistory")
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TatakPinoy.Models.Status", "Status")
+                        .WithMany("ShipmentStatusHistory")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

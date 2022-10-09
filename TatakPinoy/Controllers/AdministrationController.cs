@@ -11,6 +11,7 @@ using TatakPinoy.Models;
 namespace TatakPinoy.Controllers
 {
     /*[Authorize(Roles = "Admin")]*/
+    [Authorize]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -20,6 +21,11 @@ namespace TatakPinoy.Controllers
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+        }
+        public IActionResult Index()
+        {
+
+            return View();
         }
         [HttpGet]
         public IActionResult ListUsers()

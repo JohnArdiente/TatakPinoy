@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using TatakPinoy.Models;
 
 namespace TatakPinoy.Controllers
 {
+    [Authorize]
     public class ConsigneesController : Controller
     {
         private readonly TatakPinoyContext _context;
@@ -57,6 +59,17 @@ namespace TatakPinoy.Controllers
             }
 
             return View(consignee);
+        }
+
+        public async Task<IActionResult> Update(string searchString)
+        {
+            var consignees = from s in _context.Consignee.Include(x => x.Shipment) select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                consignees = consignees.Where(x => x.TrackingNo!.Contains(searchString));
+            }
+
+            return View(await consignees.Include(x => x.ConsigneeStatus).ToListAsync());
         }
 
         // GET: Consignees/Create
@@ -142,33 +155,8 @@ namespace TatakPinoy.Controllers
                 _context.Update(model);
                 await _context.SaveChangesAsync();
                 PopulateConsigneeStatusDropDownList(model.ConsigneeStatusId);
-                return View(consignee);
+                return RedirectToAction("Update", "Consignees");
             }
-            /*if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consigneeToUpdate = await _context.Consignee
-                .FirstOrDefaultAsync(c => c.ConsigneeId == id);
-
-            if (await TryUpdateModelAsync<Consignee>(consigneeToUpdate,
-                "",
-                c => c.TrackingNo, c => c.ConsigneeStatusId))
-            {
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException *//* ex *//*)
-                {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-                }
-                return RedirectToAction("Index", new { shipmentid = consigneeToUpdate.ShipmentId });
-            }*/
 
             return View(model);
         }

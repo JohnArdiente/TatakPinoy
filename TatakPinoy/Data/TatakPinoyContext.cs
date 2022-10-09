@@ -35,21 +35,20 @@ namespace TatakPinoy.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Status>().HasData(
-                    new Status { StatusId = 1, StatusDesc = "EDA AT MANILA PORT IS ON", ShipmentId = null },
-                    new Status { StatusId = 2, StatusDesc = "ETA AT CEBU PORT IS ON", ShipmentId = null },
-                    new Status { StatusId = 3, StatusDesc = "VESSEL DELAYED NEW EDA IS ON", ShipmentId = null },
-                    new Status { StatusId = 4, StatusDesc = "ARRIVED AT PHILIPPINE PORT AND ONGOING CUSTOMS CLEARING", ShipmentId = null },
-                    new Status { StatusId = 5, StatusDesc = "RELEASED FROM PHILIPPINE CUSTOMS", ShipmentId = null },
+                    new Status { StatusId = 1, StatusDesc = "EDA AT MANILA PORT IS", ShipmentId = null },
+                    new Status { StatusId = 2, StatusDesc = "EDA AT CEBU PORT IS", ShipmentId = null },
+                    new Status { StatusId = 3, StatusDesc = "VESSEL DELAYED NEW EDA IS", ShipmentId = null },
+                    new Status { StatusId = 4, StatusDesc = "ARRIVED AT PHILIPPINE PORT", ShipmentId = null },
+                    new Status { StatusId = 5, StatusDesc = "ONGOING CUSTOMS CLEARING", ShipmentId = null },
                     new Status { StatusId = 6, StatusDesc = "UNLOADED AT LOCAL WH", ShipmentId = null }
             );
             modelBuilder.Entity<ConsigneeStatus>().HasData(
-                    new ConsigneeStatus { Id = 1, ConsigneeStatusDesc = "ARRIVED AT MANILA WH AND SCHEDULED FOR DELIVERY" },
-                    new ConsigneeStatus { Id = 2, ConsigneeStatusDesc = "ARRIVED AT CEBU WH AND SCHEDULED FOR DELIVERY " },
-                    new ConsigneeStatus { Id = 3, ConsigneeStatusDesc = "IN TRANSIT TO CEBU WH" },
-                    new ConsigneeStatus { Id = 4, ConsigneeStatusDesc = "IN TRANSIT TO MANILA WH" },
-                    new ConsigneeStatus { Id = 5, ConsigneeStatusDesc = "ONGOING DELIVERY " },
-                    new ConsigneeStatus { Id = 6, ConsigneeStatusDesc = "BACKLOADED (REASON/EXCEPTION)" },
-                    new ConsigneeStatus { Id = 7, ConsigneeStatusDesc = "DELIVERED" }
+                    new ConsigneeStatus { Id = 1, ConsigneeStatusDesc = "SCHEDULE FOR DELIVERY" },
+                    new ConsigneeStatus { Id = 2, ConsigneeStatusDesc = "IN TRANSIT TO CEBU WH" },
+                    new ConsigneeStatus { Id = 3, ConsigneeStatusDesc = "IN TRANSIT TO MANILA WH" },
+                    new ConsigneeStatus { Id = 4, ConsigneeStatusDesc = "ONGOING DELIVERY " },
+                    new ConsigneeStatus { Id = 5, ConsigneeStatusDesc = "BACKLOADED" },
+                    new ConsigneeStatus { Id = 6, ConsigneeStatusDesc = "DELIVERED" }
             );
 
 

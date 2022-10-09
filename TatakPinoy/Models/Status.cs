@@ -11,5 +11,7 @@ namespace TatakPinoy.Models
         public string StatusDesc { get; set; }
         public int? ShipmentId { get; set; }
         public virtual ICollection<Shipment> Shipment { get; set; }
+
+        public ICollection<ShipmentStatusHistory> ShipmentStatusHistory { get; set; }
     }
 }

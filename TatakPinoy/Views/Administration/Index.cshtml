@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@if (@SignInManager.IsSignedIn(User))
+{
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                Dashboard
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Welcome @User.Identity.Name</h5>
+            </div>
+        </div>
+        </div>
+        }
+<style>
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+    }
+
+    .container-fluid {
+        width: 75%;
+    }
+</style>

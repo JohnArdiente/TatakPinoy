@@ -45,23 +45,20 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
-            <img src="~/portfolio_boostrap/img/TatakPinoyLogoS.png" alt="Alternate Text" /><h1 class="logo me-auto"></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
-
+            <img src="~/portfolio_boostrap/img/tatakpinoy.jpg" alt="Alternate Text" width="80" height="80" /><h1 class="logo me-auto"></h1>
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto active" asp-controller="Administration" asp-action="Index">Home</a></li>
                         <li class="dropdown">
                             <a href="#"><span>Shipments</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
                                 <li><a class="dropdown-item" asp-controller="Shipments" asp-action="Create">New Shipment</a></li>
                                 <li><a class="dropdown-item" asp-controller="Shipments" asp-action="Update">Update Shipment</a></li>
+                                <li><a class="dropdown-item" asp-controller="Consignees" asp-action="Update">Update Tracking</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -72,8 +69,8 @@
                             </ul>
                         </li>
                         <li><a class="nav-link scrollto" asp-controller="Messages" asp-action="Index">Messages</a></li>
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
+                        //@if (SignInManager.IsSignedIn(User)@* && User.IsInRole("Admin")*@)
+                        //{
                             <li class="dropdown">
                                 <a href="#"><span>Manage</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                                 <ul>
@@ -83,16 +80,7 @@
                                     <li><a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a></li>
                                 </ul>
                             </li>
-                        }
-
-                       @* <li class="nav-link scrollto">
-                            <form method="post" asp-controller="account" asp-action="logout">
-                                <button type="submit" style="width:auto"
-                                    class="nav-link btn btn-link py-0">
-                                    Logout @User.Identity.Name
-                                </button>
-                            </form>
-                        </li>*@
+                        //}
 
                         <li class="dropdown">
                             <a href="#"><span>@User.Identity.Name</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -107,15 +95,10 @@
                     }
                     else
                     {
-                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#Hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" asp-controller="account" asp-action="register">
-                                Register
-                            </a>
-                        </li>
                         <li class="nav-link scrollto">
                             <a class="nav-link" asp-controller="account" asp-action="login">
                                 Login
@@ -134,6 +117,7 @@
     <br />
     <div>
         <main role="main" class="pb-3">
+            <br />
             @RenderBody()
         </main>
     </div>

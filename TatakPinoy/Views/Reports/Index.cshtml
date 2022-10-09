@@ -1,0 +1,58 @@
+﻿
+<div class="container-fluid">
+
+    <div class="space space-10"></div>
+    <div class="col-md-3" style="margin-left: 25px">
+        <div class="widget-box">
+            <div class="widget-header">
+
+                <h4 class="widget-title"> <span class="glyphicon glyphicon-list-alt"></span>Reports</h4>
+
+                <span class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </span>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <form action="@Url.Action("Export","Reports")" method="post">
+                        @Html.AntiForgeryToken()
+                        <label>Format: </label>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12">
+                                <select name="format" class="form-control" tabindex="-1" aria-disabled="true" disabled>
+                                    <option value="excel">EXCEL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space space-8"></div>
+                        <label>Shipment Number</label>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12">
+                                <div>
+                                    <input class="form-control" type="text" name="shipment_no">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space space-8"></div>
+                        <div class="row">
+                            <div class="">
+                                <div class="col-xs-12 col-sm-12">
+                                    <button type="submit" class="btn btn-success btn-sm pull-right"> <span class="glyphicon glyphicon-download-alt"></span> Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .container-fluid {
+        width: 50%;
+    }
+</style>

@@ -14,11 +14,13 @@ namespace TatakPinoy.Models
         public int ShipmentId { get; set; }
         public string ShipmentNo { get; set; }
 
+        [Display(Name ="Date")]
+        public DateTime DateOn { get; set; }
+
         public ICollection<Consignee> Consignees { get; set; }
 
-        [ForeignKey("StatusId")]
-        public int StatusId { get; set; }
-        [JsonIgnore]
-        public Status Status { get; set; }
+        public int? StatusId { get; set; }
+        public virtual Status Status { get; set; }
+        public ICollection<ShipmentStatusHistory> ShipmentStatusHistory { get; set; }
     }
 }

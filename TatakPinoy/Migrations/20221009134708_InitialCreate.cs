@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TatakPinoy.Migrations
 {
-    public partial class AddingIdentity : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -139,7 +139,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,7 +160,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,7 +180,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,13 +198,13 @@ namespace TatakPinoy.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,7 +224,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,7 +234,8 @@ namespace TatakPinoy.Migrations
                     ShipmentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShipmentNo = table.Column<string>(nullable: true),
-                    StatusId = table.Column<int>(nullable: false)
+                    DateOn = table.Column<DateTime>(nullable: false),
+                    StatusId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -244,7 +245,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.StatusId,
                         principalTable: "Status",
                         principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,6 +287,34 @@ namespace TatakPinoy.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ShipmentStatusHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateOn = table.Column<DateTime>(nullable: false),
+                    StatusId = table.Column<int>(nullable: false),
+                    ShipmentId = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShipmentStatusHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShipmentStatusHistory_Shipment_ShipmentId",
+                        column: x => x.ShipmentId,
+                        principalTable: "Shipment",
+                        principalColumn: "ShipmentId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ShipmentStatusHistory_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ConsigneeStatusHistories",
                 columns: table => new
                 {
@@ -303,13 +332,13 @@ namespace TatakPinoy.Migrations
                         column: x => x.ConsigneeId,
                         principalTable: "Consignee",
                         principalColumn: "ConsigneeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ConsigneeStatusHistories_ConsigneeStatus_ConsigneeStatusId",
                         column: x => x.ConsigneeStatusId,
                         principalTable: "ConsigneeStatus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -317,13 +346,12 @@ namespace TatakPinoy.Migrations
                 columns: new[] { "Id", "ConsigneeStatusDesc" },
                 values: new object[,]
                 {
-                    { 1, "ARRIVED AT MANILA WH AND SCHEDULED FOR DELIVERY" },
-                    { 2, "ARRIVED AT CEBU WH AND SCHEDULED FOR DELIVERY " },
-                    { 3, "IN TRANSIT TO CEBU WH" },
-                    { 4, "IN TRANSIT TO MANILA WH" },
-                    { 5, "ONGOING DELIVERY " },
-                    { 6, "BACKLOADED (REASON/EXCEPTION)" },
-                    { 7, "DELIVERED" }
+                    { 1, "SCHEDULE FOR DELIVERY" },
+                    { 2, "IN TRANSIT TO CEBU WH" },
+                    { 3, "IN TRANSIT TO MANILA WH" },
+                    { 4, "ONGOING DELIVERY " },
+                    { 5, "BACKLOADED" },
+                    { 6, "DELIVERED" }
                 });
 
             migrationBuilder.InsertData(
@@ -331,11 +359,11 @@ namespace TatakPinoy.Migrations
                 columns: new[] { "StatusId", "ShipmentId", "StatusDesc" },
                 values: new object[,]
                 {
-                    { 1, null, "EDA AT MANILA PORT IS ON" },
-                    { 2, null, "ETA AT CEBU PORT IS ON" },
-                    { 3, null, "VESSEL DELAYED NEW EDA IS ON" },
-                    { 4, null, "ARRIVED AT PHILIPPINE PORT AND ONGOING CUSTOMS CLEARING" },
-                    { 5, null, "RELEASED FROM PHILIPPINE CUSTOMS" },
+                    { 1, null, "EDA AT MANILA PORT IS" },
+                    { 2, null, "EDA AT CEBU PORT IS" },
+                    { 3, null, "VESSEL DELAYED NEW EDA IS" },
+                    { 4, null, "ARRIVED AT PHILIPPINE PORT" },
+                    { 5, null, "ONGOING CUSTOMS CLEARING" },
                     { 6, null, "UNLOADED AT LOCAL WH" }
                 });
 
@@ -402,6 +430,16 @@ namespace TatakPinoy.Migrations
                 name: "IX_Shipment_StatusId",
                 table: "Shipment",
                 column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShipmentStatusHistory_ShipmentId",
+                table: "ShipmentStatusHistory",
+                column: "ShipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShipmentStatusHistory_StatusId",
+                table: "ShipmentStatusHistory",
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -429,6 +467,9 @@ namespace TatakPinoy.Migrations
 
             migrationBuilder.DropTable(
                 name: "Message");
+
+            migrationBuilder.DropTable(
+                name: "ShipmentStatusHistory");
 
             migrationBuilder.DropTable(
                 name: "UserModels");

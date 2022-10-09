@@ -14,6 +14,7 @@ using TatakPinoy.Services;
 
 namespace TatakPinoy.Controllers
 {
+    
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -48,7 +49,7 @@ namespace TatakPinoy.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("index", "home");
+                        return RedirectToAction("index", "Administration");
                     }
                 }
 

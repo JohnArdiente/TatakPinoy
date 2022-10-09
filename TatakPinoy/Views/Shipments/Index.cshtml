@@ -22,10 +22,10 @@
                     <th>
                         Shipment Number
                     </th>
-                    <th>
+                    <th class="text-center">
                             Status
                         </th>
-                    <th>
+                    <th class="text-center">
                         Actions
                     </th>
                 </tr>
@@ -37,10 +37,10 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ShipmentNo)
                         </td>
-                        <td>
-                            @item.Status.StatusDesc
+                        <td class="text-center">
+                            @item.Status?.StatusDesc @item.DateOn.ToString("MMM d, yyyy")
                         </td>
-                        <td>
+                        <td class="text-center">
                             @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
                             @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
                         </td>
