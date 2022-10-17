@@ -13,9 +13,10 @@ namespace TatakPinoy.Models
         [Key]
         public int ShipmentId { get; set; }
         public string ShipmentNo { get; set; }
+        public string ContainerNo { get; set; }
 
         [Display(Name ="Date")]
-        public DateTime DateOn { get; set; }
+        public DateTime? DateOn { get; set; }
 
         public ICollection<Consignee> Consignees { get; set; }
 

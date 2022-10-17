@@ -24,7 +24,7 @@ namespace TatakPinoy.Controllers
         // GET: ConsigneeStatus
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ConsigneeStatus.ToListAsync());
+            return View(await _context.ConsigneeStatus.Where(x=>x.Id != 1).ToListAsync());
         }
 
         // GET: ConsigneeStatus/Details/5

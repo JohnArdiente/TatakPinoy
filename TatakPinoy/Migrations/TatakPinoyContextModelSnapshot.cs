@@ -400,7 +400,10 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateOn")
+                    b.Property<string>("ContainerNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShipmentNo")
@@ -465,31 +468,36 @@ namespace TatakPinoy.Migrations
                         new
                         {
                             StatusId = 1,
-                            StatusDesc = "EDA AT MANILA PORT IS"
+                            StatusDesc = "Select Status"
                         },
                         new
                         {
                             StatusId = 2,
-                            StatusDesc = "EDA AT CEBU PORT IS"
+                            StatusDesc = "EDA AT MANILA PORT IS"
                         },
                         new
                         {
                             StatusId = 3,
-                            StatusDesc = "VESSEL DELAYED NEW EDA IS"
+                            StatusDesc = "EDA AT CEBU PORT IS"
                         },
                         new
                         {
                             StatusId = 4,
-                            StatusDesc = "ARRIVED AT PHILIPPINE PORT"
+                            StatusDesc = "VESSEL DELAYED NEW EDA IS"
                         },
                         new
                         {
                             StatusId = 5,
-                            StatusDesc = "ONGOING CUSTOMS CLEARING"
+                            StatusDesc = "ARRIVED AT PHILIPPINE PORT"
                         },
                         new
                         {
                             StatusId = 6,
+                            StatusDesc = "ONGOING CUSTOMS CLEARING"
+                        },
+                        new
+                        {
+                            StatusId = 7,
                             StatusDesc = "UNLOADED AT LOCAL WH"
                         });
                 });

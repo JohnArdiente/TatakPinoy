@@ -33,7 +33,8 @@ namespace TatakPinoy.Controllers
                 shipments = shipments.Where(s => s.ShipmentNo!.Contains(searchString));
             }
 
-            return View(await shipments.Include(x=>x.Status).ToListAsync());
+
+            return View(await shipments.Include(x=>x.Status).Include(x=>x.Consignees).ToListAsync());
         }
 
         // GET: Shipments
@@ -84,7 +85,7 @@ namespace TatakPinoy.Controllers
         {
             if (ModelState.IsValid)
             {
-                shipment.StatusId = 1;
+                /*shipment.StatusId = 1;*/
                 _context.Add(shipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -130,7 +131,7 @@ namespace TatakPinoy.Controllers
 
                 if ((shipment.StatusId != model.StatusId) && model.StatusId != null)
                 {
-                    DateTime date = model.DateOn;
+                    DateTime date = (DateTime)model.DateOn;
                     var newHistory = new ShipmentStatusHistory()
                     {
                         ShipmentId = shipment.ShipmentId,

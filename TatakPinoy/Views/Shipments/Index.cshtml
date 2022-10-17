@@ -22,9 +22,15 @@
                     <th>
                         Shipment Number
                     </th>
+                    <th>
+                        Container Number
+                    </th>
+                    <th>
+                        Total Boxes
+                    </th>
                     <th class="text-center">
-                            Status
-                        </th>
+                        Status
+                    </th>
                     <th class="text-center">
                         Actions
                     </th>
@@ -33,18 +39,24 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ShipmentNo)
-                        </td>
-                        <td class="text-center">
-                            @item.Status?.StatusDesc @item.DateOn.ToString("MMM d, yyyy")
-                        </td>
-                        <td class="text-center">
-                            @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
-                            @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipmentNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContainerNo)
+                    </td>
+                    <td>
+                        @item.Consignees?.Sum(x=>x.Qty)
+                    </td>
+                    <td class="text-center">
+                        @item.Status?.StatusDesc @item.DateOn?.ToString("MMM d, yyyy")
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
+                        @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
