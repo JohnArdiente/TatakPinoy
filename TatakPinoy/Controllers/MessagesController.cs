@@ -11,7 +11,7 @@ using TatakPinoy.Models;
 
 namespace TatakPinoy.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MessagesController : Controller
     {
         

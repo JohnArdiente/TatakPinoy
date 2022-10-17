@@ -2,19 +2,20 @@
 @using System.Globalization 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
 
-<div class="container">
+<div class="container-fluid">
         <br />
         <form class="form-inline float-right" asp-controller="Consignees" asp-action="Search" id="search_form">
             <div class="col-md-6"> <input class="form-control mr-sm-2" type="text" name="SearchString" placeholder="Search" aria-label="Search" id="search"></div>
             <br />
-        <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button>&nbsp;<button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button" onclick="viewAllClicked();">View All</button><a asp-controller="Shipments" asp-action="Index" class="btn btn-sm btn-outline-success my-2 my-sm-0 bx-pull-right">Back</a>
-        <a class="btn btn-sm btn-outline-success my-2 my-sm-0 bx-pull-right" asp-action="Create" asp-route-shipmentId="@ViewBag.ShipmentId">New Entry</a>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit" value="Filter">Search</button><button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="button" onclick="viewAllClicked();">View All</button>
         </form>
+        <a asp-controller="Shipments" asp-action="Index" class="btn btn-sm btn-outline-success my-2 my-sm-0 bx-pull-right">Back</a>
+        <a class="btn btn-sm btn-outline-success my-2 my-sm-0 bx-pull-right" asp-action="Create" asp-route-shipmentId="@ViewBag.ShipmentId">New Entry</a>
         @if (Model.Count() > 0)
         {
      
@@ -101,6 +102,8 @@
         }
         else
         {
+        <br />
+        <br />
             <div class="alert alert-block alert-danger">
                 <i class="ace-icon fa fa-warning red"></i>
                 No Records found
@@ -115,6 +118,6 @@
     </script>
     <style>
         .container-fluid {
-            width: 85%;
+            width: 100%;
         }
     </style>
