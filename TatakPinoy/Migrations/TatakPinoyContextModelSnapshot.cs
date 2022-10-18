@@ -379,6 +379,9 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ContactNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -403,6 +406,9 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("ContainerNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateOn")
                         .HasColumnType("datetime2");
 
@@ -426,7 +432,7 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateOn")
+                    b.Property<DateTime?>("DateOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ShipmentId")

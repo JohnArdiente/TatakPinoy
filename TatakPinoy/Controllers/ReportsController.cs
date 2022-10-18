@@ -55,6 +55,21 @@ namespace TatakPinoy.Controllers
 
                 var shipments = _TatakContext.Shipment.Include(x => x.Consignees).Where(x=>x.ShipmentNo == shipment_no).ToList();
 
+                ViewBag.shipmentNo = shipment_no;
+                if (shipments.Count == 0)
+                {
+                    ViewBag.shipments = "Shipment Not Found";
+                    return View("Views/Reports/Index.cshtml", shipments);
+                }
+                else
+                {
+                    ViewBag.found = "Shipment No:" + shipments.FirstOrDefault().ShipmentNo + '\n' 
+                                    + "Container No:" + shipments.FirstOrDefault().ContainerNo + '\n' 
+                                    + "Qty:" + shipments.FirstOrDefault().Consignees.Sum(x=>x.Qty);
+
+                    return View("Views/Reports/Index.cshtml", shipments);
+                }
+
                 var currentRow = 8;
 
                 var ws = wb.Worksheets.Add(dt);
@@ -67,7 +82,7 @@ namespace TatakPinoy.Controllers
 
                 ws.Cell("B1").Style.Font.FontSize = 10;
                 ws.Cell("B1").Style.Font.FontName = "Calibri Light";
-                ws.Cell("B1").Value = result.FirstOrDefault().shipmentNo;
+                ws.Cell("B1").Value = shipments.FirstOrDefault().ShipmentNo;
                 ws.Cell("B1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                 ws.Cell("A2").Style.Font.FontSize = 10;
@@ -79,7 +94,7 @@ namespace TatakPinoy.Controllers
                 ws.Cell("B2").Style.Font.FontSize = 10;
                 ws.Cell("B2").Style.Font.FontName = "Calibri Light";
                 ws.Cell("B2").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-                ws.Cell("B2").Value = result.FirstOrDefault().containerNo;
+                ws.Cell("B2").Value = shipments.FirstOrDefault().ContainerNo;
 
 
 

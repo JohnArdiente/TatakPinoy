@@ -2,9 +2,11 @@
 
 @{
     var roleId = ViewBag.roleId;
+    ViewData["Title"] = "Edit User in Role";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container">
     <form method="post">
         <div class="card">
             <div class="card-header">
@@ -32,8 +34,3 @@
         </div>
     </form>
 </div>
-<style>
-    .container-fluid {
-        width: 65%;
-    }
-</style>

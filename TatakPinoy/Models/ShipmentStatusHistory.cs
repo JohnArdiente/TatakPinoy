@@ -8,7 +8,7 @@ namespace TatakPinoy.Models
     public class ShipmentStatusHistory
     {
         public int Id { get; set; }
-        public DateTime DateOn { get; set; }
+        public DateTime? DateOn { get; set; }
         public int StatusId { get; set; }
         public virtual Status Status { get; set; }
         public int ShipmentId { get; set; }

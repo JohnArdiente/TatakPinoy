@@ -30,7 +30,7 @@ namespace TatakPinoy
             services.AddControllersWithViews();
 
             services.AddDbContext<TatakPinoyContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TatakPinoyContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("PhilTatakPinoyContext")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {

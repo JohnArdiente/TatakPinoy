@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container">
+    <br />
     <form class="form-inline float-right" asp-controller="Consignees" asp-action="Search" id="search_form">
         <div class="col-md-6"> <input class="form-control mr-sm-2" type="text" name="SearchString" placeholder="Search" aria-label="Search" id="search"></div>
         <br />
@@ -54,45 +55,45 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrackingNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShipersName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShipersNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ConsigneesName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ConsigneesAddr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ConsigneesNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Qty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AgentsName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PickupDate)
-                    </td>
-                    <td>
-                        @item.ConsigneeStatus.ConsigneeStatusDesc
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-outline-primary " asp-action="Edit" asp-route-id="@item.ConsigneeId"> Edit   </a>
-                        @*<a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |*@
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-outline-danger " asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrackingNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShipersName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShipersNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConsigneesName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConsigneesAddr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConsigneesNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AgentsName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PickupDate)
+                        </td>
+                        <td>
+                            @item.ConsigneeStatus?.ConsigneeStatusDesc
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary " asp-action="Edit" asp-route-id="@item.ConsigneeId"> Edit   </a>
+                            @*<a asp-action="Details" asp-route-id="@item.ConsigneeId">Details</a> |*@
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-danger " asp-action="Delete" asp-route-id="@item.ConsigneeId">Delete</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -113,8 +114,3 @@
         $('#search_form').submit();
     }
 </script>
-<style>
-    .container-fluid {
-        width: 100%;
-    }
-</style>

@@ -7,7 +7,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
         <br />
         <form class="form-inline float-right" asp-controller="Consignees" asp-action="Search" id="search_form">
             <div class="col-md-6"> <input class="form-control mr-sm-2" type="text" name="SearchString" placeholder="Search" aria-label="Search" id="search"></div>
@@ -116,8 +116,3 @@
             $('#search_form').submit();
         }
     </script>
-    <style>
-        .container-fluid {
-            width: 100%;
-        }
-    </style>

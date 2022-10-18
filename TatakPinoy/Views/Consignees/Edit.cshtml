@@ -84,7 +84,6 @@
                     <input asp-for="DeliveryDate" class="form-control" type="date" />
                     <span asp-validation-for="DeliveryDate" class="text-danger"></span>
                 </div>
-                <br>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-sm btn-outline-success" />
                     <a class="btn btn-sm btn-outline-success" asp-controller="Consignees" asp-action="Index" asp-route-shipmentid="@Model.ShipmentId">Back to List</a>

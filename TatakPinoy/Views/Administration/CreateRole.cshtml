@@ -1,6 +1,9 @@
 ﻿@model CreateRoleViewModel
-
-<div class="container-fluid">
+@{
+    ViewData["Title"] = "Create Role";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
     <h4>Create new Role</h4>
     <hr />
 
@@ -26,8 +29,3 @@
     <div>
     </div>
 </div>
-<style>
-    .container-fluid {
-        width: 65%;
-    }
-</style>

@@ -157,7 +157,7 @@
             {
                 <li class="list-group-item">
                     <p style="text-align:left">
-                        <b>@items.Status.StatusDesc.ToUpper() @items.DateOn.ToString("MMM d, yyyy")</b><span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
+                        <b>@items.Status.StatusDesc.ToUpper() @items.DateOn?.ToString("MMM d, yyyy")</b><span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
                     </p>
                 </li>
             }

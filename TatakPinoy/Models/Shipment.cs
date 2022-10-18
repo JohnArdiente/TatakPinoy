@@ -14,6 +14,7 @@ namespace TatakPinoy.Models
         public int ShipmentId { get; set; }
         public string ShipmentNo { get; set; }
         public string ContainerNo { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [Display(Name ="Date")]
         public DateTime? DateOn { get; set; }

@@ -84,7 +84,8 @@ namespace TatakPinoy.Migrations
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     ContactNo = table.Column<string>(nullable: true),
-                    Msg = table.Column<string>(nullable: true)
+                    Msg = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,6 +236,7 @@ namespace TatakPinoy.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShipmentNo = table.Column<string>(nullable: true),
                     ContainerNo = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
                     DateOn = table.Column<DateTime>(nullable: true),
                     StatusId = table.Column<int>(nullable: true)
                 },
@@ -293,7 +295,7 @@ namespace TatakPinoy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateOn = table.Column<DateTime>(nullable: false),
+                    DateOn = table.Column<DateTime>(nullable: true),
                     StatusId = table.Column<int>(nullable: false),
                     ShipmentId = table.Column<int>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)

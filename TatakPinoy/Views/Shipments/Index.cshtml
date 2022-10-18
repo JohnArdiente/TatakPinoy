@@ -38,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.OrderByDescending(x=>x.CreatedAt))
                 {
                 <tr>
                     <td>
@@ -51,7 +51,15 @@
                         @item.Consignees?.Sum(x=>x.Qty)
                     </td>
                     <td class="text-center">
-                        @item.Status?.StatusDesc @item.DateOn?.ToString("MMM d, yyyy")
+                        @if (@item.DateOn?.ToString("MMM d, yyyy") == "Jan 1, 0001")
+                        {
+                            @item.Status?.StatusDesc
+                        }
+                        else
+                        {
+                            @item.Status?.StatusDesc@:&nbsp;@item.DateOn?.ToString("MMM d, yyyy")
+                        }
+
                     </td>
                     <td class="text-center">
                         @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })

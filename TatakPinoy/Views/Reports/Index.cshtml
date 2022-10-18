@@ -1,58 +1,38 @@
 ﻿
-<div class="container-fluid">
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h4>Create new Shipment</h4>
+    <hr />
 
-    <div class="space space-10"></div>
-    <div class="col-md-3" style="margin-left: 25px">
-        <div class="widget-box">
-            <div class="widget-header">
-
-                <h4 class="widget-title"> <span class="glyphicon glyphicon-list-alt"></span>Reports</h4>
-
-                <span class="widget-toolbar">
-                    <a href="#" data-action="collapse">
-                        <i class="ace-icon fa fa-chevron-up"></i>
-                    </a>
-                </span>
-            </div>
-            <div class="widget-body">
-                <div class="widget-main">
-                    <form action="@Url.Action("Export","Reports")" method="post">
-                        @Html.AntiForgeryToken()
-                        <label>Format: </label>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12">
-                                <select name="format" class="form-control" tabindex="-1" aria-disabled="true" disabled>
-                                    <option value="excel">EXCEL</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="space space-8"></div>
-                        <label>Shipment Number</label>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12">
-                                <div>
-                                    <input class="form-control" type="text" name="shipment_no">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space space-8"></div>
-                        <div class="row">
-                            <div class="">
-                                <div class="col-xs-12 col-sm-12">
-                                    <button type="submit" class="btn btn-success btn-sm pull-right"> <span class="glyphicon glyphicon-download-alt"></span> Download</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="@Url.Action("Export","Reports")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label"> Shipment Number: </label>
+                    <input class="form-control" type="text" name="shipment_no" value="@ViewBag.shipmentNo" />
                 </div>
-            </div>
+                @if (ViewBag.shipments != null)
+                {
+                    <p class="alert alert-danger">@ViewBag.shipments</p>
+                }
+                else if (ViewBag.found != null)
+                {
+                    <p class="alert alert-success">@ViewBag.found</p>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Download" class="btn btn-sm btn-outline-success" />
+                </div>
+            </form>
         </div>
+
+
     </div>
 
-</div>
+    <div>
 
-<style>
-    .container-fluid {
-        width: 50%;
-    }
-</style>
+    </div>
+</div>

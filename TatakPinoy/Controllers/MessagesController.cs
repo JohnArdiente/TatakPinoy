@@ -28,24 +28,6 @@ namespace TatakPinoy.Controllers
             return View(await _context.Message.ToListAsync());
         }
 
-        // GET: Messages/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var message = await _context.Message
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-
-            return View(message);
-        }
-
         // GET: Messages/Create
         public IActionResult Create()
         {
@@ -61,6 +43,7 @@ namespace TatakPinoy.Controllers
         {
             if (ModelState.IsValid)
             {
+                message.CreatedAt = DateTime.Now;
                 _context.Add(message);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

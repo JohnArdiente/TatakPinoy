@@ -81,11 +81,12 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShipmentId,ShipmentNo")] Shipment shipment)
+        public async Task<IActionResult> Create([Bind("ShipmentId,ShipmentNo,ContainerNo")] Shipment shipment)
         {
             if (ModelState.IsValid)
             {
                 /*shipment.StatusId = 1;*/
+                shipment.CreatedAt = DateTime.Now;
                 _context.Add(shipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -131,7 +132,8 @@ namespace TatakPinoy.Controllers
 
                 if ((shipment.StatusId != model.StatusId) && model.StatusId != null)
                 {
-                    DateTime date = (DateTime)model.DateOn;
+                    model.DateOn = new DateTime();
+                    var date = model?.DateOn;
                     var newHistory = new ShipmentStatusHistory()
                     {
                         ShipmentId = shipment.ShipmentId,
