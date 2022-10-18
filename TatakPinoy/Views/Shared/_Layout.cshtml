@@ -15,8 +15,6 @@
 <link href="~assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">-->
 <!-- Template Main CSS File -->
 <!--<link href="assets/css/main.css" rel="stylesheet">-->
-
-
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -43,6 +41,14 @@
     <title>@ViewData["Title"] - PhilTatakPinoy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 </head>
 <body>
     <header id="header" class="fixed-top d-flex align-items-center">
@@ -96,9 +102,9 @@
                     }
                     else
                     {
-                        <li><a class="nav-link scrollto" href="#Hero">Home</a></li>
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto " href="#about">About Us</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">About Us</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
                         <li class="nav-link scrollto">
                             <a class="nav-link" asp-controller="account" asp-action="login">
@@ -130,9 +136,9 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

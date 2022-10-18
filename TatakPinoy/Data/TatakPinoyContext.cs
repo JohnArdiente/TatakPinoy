@@ -35,13 +35,12 @@ namespace TatakPinoy.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Status>().HasData(
-                    new Status { StatusId = 1, StatusDesc = "Select Status", ShipmentId = null },
-                    new Status { StatusId = 2, StatusDesc = "EDA AT MANILA PORT IS", ShipmentId = null },
-                    new Status { StatusId = 3, StatusDesc = "EDA AT CEBU PORT IS", ShipmentId = null },
-                    new Status { StatusId = 4, StatusDesc = "VESSEL DELAYED NEW EDA IS", ShipmentId = null },
-                    new Status { StatusId = 5, StatusDesc = "ARRIVED AT PHILIPPINE PORT", ShipmentId = null },
-                    new Status { StatusId = 6, StatusDesc = "ONGOING CUSTOMS CLEARING", ShipmentId = null },
-                    new Status { StatusId = 7, StatusDesc = "UNLOADED AT LOCAL WH", ShipmentId = null }
+                    new Status { StatusId = 1, StatusDesc = "EDA AT MANILA PORT IS", ShipmentId = null },
+                    new Status { StatusId = 2, StatusDesc = "EDA AT CEBU PORT IS", ShipmentId = null },
+                    new Status { StatusId = 3, StatusDesc = "VESSEL DELAYED NEW EDA IS", ShipmentId = null },
+                    new Status { StatusId = 4, StatusDesc = "ARRIVED AT PHILIPPINE PORT", ShipmentId = null },
+                    new Status { StatusId = 5, StatusDesc = "ONGOING CUSTOMS CLEARING", ShipmentId = null },
+                    new Status { StatusId = 6, StatusDesc = "UNLOADED AT LOCAL WH", ShipmentId = null }
             );
             modelBuilder.Entity<ConsigneeStatus>().HasData(
                     new ConsigneeStatus { Id = 1, ConsigneeStatusDesc = "SCHEDULE FOR DELIVERY" },

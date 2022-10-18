@@ -362,13 +362,12 @@ namespace TatakPinoy.Migrations
                 columns: new[] { "StatusId", "ShipmentId", "StatusDesc" },
                 values: new object[,]
                 {
-                    { 1, null, "Select Status" },
-                    { 2, null, "EDA AT MANILA PORT IS" },
-                    { 3, null, "EDA AT CEBU PORT IS" },
-                    { 4, null, "VESSEL DELAYED NEW EDA IS" },
-                    { 5, null, "ARRIVED AT PHILIPPINE PORT" },
-                    { 6, null, "ONGOING CUSTOMS CLEARING" },
-                    { 7, null, "UNLOADED AT LOCAL WH" }
+                    { 1, null, "EDA AT MANILA PORT IS" },
+                    { 2, null, "EDA AT CEBU PORT IS" },
+                    { 3, null, "VESSEL DELAYED NEW EDA IS" },
+                    { 4, null, "ARRIVED AT PHILIPPINE PORT" },
+                    { 5, null, "ONGOING CUSTOMS CLEARING" },
+                    { 6, null, "UNLOADED AT LOCAL WH" }
                 });
 
             migrationBuilder.CreateIndex(

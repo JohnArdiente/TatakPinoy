@@ -474,36 +474,31 @@ namespace TatakPinoy.Migrations
                         new
                         {
                             StatusId = 1,
-                            StatusDesc = "Select Status"
-                        },
-                        new
-                        {
-                            StatusId = 2,
                             StatusDesc = "EDA AT MANILA PORT IS"
                         },
                         new
                         {
-                            StatusId = 3,
+                            StatusId = 2,
                             StatusDesc = "EDA AT CEBU PORT IS"
                         },
                         new
                         {
-                            StatusId = 4,
+                            StatusId = 3,
                             StatusDesc = "VESSEL DELAYED NEW EDA IS"
                         },
                         new
                         {
-                            StatusId = 5,
+                            StatusId = 4,
                             StatusDesc = "ARRIVED AT PHILIPPINE PORT"
                         },
                         new
                         {
-                            StatusId = 6,
+                            StatusId = 5,
                             StatusDesc = "ONGOING CUSTOMS CLEARING"
                         },
                         new
                         {
-                            StatusId = 7,
+                            StatusId = 6,
                             StatusDesc = "UNLOADED AT LOCAL WH"
                         });
                 });
