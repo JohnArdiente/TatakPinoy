@@ -14,7 +14,7 @@ using TatakPinoy.Services;
 
 namespace TatakPinoy.Controllers
 {
-    
+    /*[Authorize]*/
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -66,7 +66,7 @@ namespace TatakPinoy.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)

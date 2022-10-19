@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +14,7 @@ using TatakPinoy.Models;
 
 namespace TatakPinoy.Controllers
 {
+    [Authorize]
     public class ReportsController : Controller
     {
         private readonly TatakPinoyContext _TatakContext;
@@ -59,14 +61,6 @@ namespace TatakPinoy.Controllers
                 if (shipments.Count == 0)
                 {
                     ViewBag.shipments = "Shipment Not Found";
-                    return View("Views/Reports/Index.cshtml", shipments);
-                }
-                else
-                {
-                    ViewBag.found = "Shipment No:" + shipments.FirstOrDefault().ShipmentNo + '\n' 
-                                    + "Container No:" + shipments.FirstOrDefault().ContainerNo + '\n' 
-                                    + "Qty:" + shipments.FirstOrDefault().Consignees.Sum(x=>x.Qty);
-
                     return View("Views/Reports/Index.cshtml", shipments);
                 }
 

@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"] - PhilTatakPinoy</title>
+    <title>@ViewData["Title"] - TatakPinoyUsa</title>
     <link rel="icon" type="image/x-icon" href="~/portfolio_boostrap/img/tatakpinoy.jpg">
 
     <!-- Google Font: Source Sans Pro -->
@@ -52,9 +52,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
-                <img src="~/portfolio_boostrap/img/tatakpinoy.jpg" alt="PhilTatakPinoy Logo" class="rounded-circle" width="35" height="38">
-                <span class="brand-text font-weight-light">PhilTatakPinoy</span>
+            <a asp-controller="Administration" asp-action="Index" class="brand-link">
+                <img src="~/portfolio_boostrap/img/tatakpinoy.jpg" alt="TatakPinoyUsa Logo" class="rounded-circle" width="35" height="38">
+                <span class="brand-text font-weight-light">TATAK PINOY USA LLC</span>
             </a>
 
             <!-- Sidebar -->
@@ -140,6 +140,7 @@
                                 </p>
                             </a>
                         </li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")){
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -161,8 +162,9 @@
                                         <p>Roles</p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul>         
                         </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -215,7 +217,7 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2022 Phil Tatak Pinoy.</strong> All rights reserved.
+            <strong>Copyright &copy; 2022 TATAK PINOY USA LLC.</strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
