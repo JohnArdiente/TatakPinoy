@@ -6,7 +6,7 @@
    
 }
         
-<div class="container-fluid">
+<div class="container">
     <br />
     <form asp-controller="Shipments" asp-action="Index" id="search_form" method="get">
         <div class="col-md-6">  <input class="form-control" type="text" name="SearchString" placeholder="Search" aria-label="Search"></div>
@@ -72,6 +72,7 @@
     }
     else
     {
+        <br />
         <div class="alert alert-block alert-danger">
             <i class="ace-icon fa fa-warning red"></i>
             No Records found
@@ -84,8 +85,3 @@ function viewAllClicked() {
   $('#search_form').submit();
 }
 </script>
-<style>
-    .container-fluid {
-        width: 100%;
-    }
-</style>

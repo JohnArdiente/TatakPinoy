@@ -166,35 +166,33 @@
     </div>
 </div>
         }
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function viewAllClicked() {
+        $('#search').val('');
+        $('#search_form').submit();
+    }
+</script>
+<style>
+    .card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+    }
 
+    .form-control-borderless {
+        border: none;
+    }
 
+        .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
 
-        <script>
-            function viewAllClicked() {
-                $('#search').val('');
-                $('#search_form').submit();
-            }
-        </script>
-        <style>
-            .card {
-                margin: 0 auto;
-                float: none;
-                margin-bottom: 10px;
-            }
-
-            .form-control-borderless {
-                border: none;
-            }
-
-                .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
-                    border: none;
-                    outline: none;
-                    box-shadow: none;
-                }
-
-            .container-fluid {
-                width: 30%;
-            }
-        </style>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    .container-fluid {
+        width: 30%;
+    }
+</style>
+        
