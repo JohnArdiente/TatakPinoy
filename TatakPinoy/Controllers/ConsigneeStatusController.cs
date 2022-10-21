@@ -28,7 +28,7 @@ namespace TatakPinoy.Controllers
         }
 
         // GET: ConsigneeStatus/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {

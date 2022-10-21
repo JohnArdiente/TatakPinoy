@@ -185,7 +185,8 @@ namespace TatakPinoy.Controllers
         /*[ValidateAntiForgeryToken]*/
         public async Task<IActionResult> Delete(int id)
         {
-            var consignee = await _context.Consignee.Where(x => x.ConsigneeId == id).FirstOrDefaultAsync();
+            var consignee = await _context.Consignee.Include(x => x.ConsigneeStatusHistories).Include(x=>x.ConsigneeStatus).FirstOrDefaultAsync(x=>x.ConsigneeId == id);
+            consignee.ConsigneeStatusHistories.Clear();
             _context.Consignee.Remove(consignee);
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));

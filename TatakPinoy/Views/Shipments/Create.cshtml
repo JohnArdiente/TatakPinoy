@@ -14,8 +14,14 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ShipmentNo" class="control-label"> Shipment Number: </label>
-                    <input asp-for="ShipmentNo" class="form-control" />
+                    <input asp-for="ShipmentNo" id="shipmentNo" class="form-control" onchange="DataCheck()" />
                     <span asp-validation-for="ShipmentNo" class="text-danger"></span>
+                    <div class="row">
+                        <label class="col-sm-2"></label>
+                        <div class="col-sm-10">
+                            <p id="Status" />
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="ContainerNo" class="control-label">Container Number: </label>
@@ -37,3 +43,23 @@
 
     </div>
 </div>
+<script>
+    function DataCheck() {
+        $("#Status").html("Checking...");
+        $.post("@Url.Action("CheckifExist", "Shipments")",
+            {
+                userdata: $("#shipmentNo").val()
+            },
+            function (data) {
+                if (data == 0) {
+                    $("#Status").html('<font color="Green">Shipment Number is available</font>');
+                    $("#shipmentNo").css("border-color", "Green");
+
+                }
+                else {
+                    $("#Status").html('<font color="Red">Shipment Number Already Exist!</font>');
+                    $("#shipmentNo").css("border-color", "Red");
+                }
+            });
+    }
+</script>

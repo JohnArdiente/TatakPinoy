@@ -41,6 +41,12 @@ namespace TatakPinoy
                 options.Password.RequireLowercase = false;
             })
                 .AddEntityFrameworkStores<TatakPinoyContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

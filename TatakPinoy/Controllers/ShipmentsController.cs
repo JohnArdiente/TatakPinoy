@@ -94,6 +94,20 @@ namespace TatakPinoy.Controllers
             return View(shipment);
         }
 
+        public JsonResult CheckifExist(string userdata)
+        {
+            var data = _context.Shipment.Where(x => x.ShipmentNo == userdata).SingleOrDefault();
+
+            if (data != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+
         // GET: Shipments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
