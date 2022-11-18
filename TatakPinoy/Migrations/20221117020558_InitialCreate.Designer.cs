@@ -10,7 +10,7 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221019022329_InitialCreate")]
+    [Migration("20221117020558_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -599,7 +599,7 @@ namespace TatakPinoy.Migrations
                     b.HasOne("TatakPinoy.Models.Consignee", "Consignee")
                         .WithMany("ConsigneeStatusHistories")
                         .HasForeignKey("ConsigneeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TatakPinoy.Models.ConsigneeStatus", "ConsigneeStatus")

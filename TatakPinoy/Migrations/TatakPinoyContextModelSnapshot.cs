@@ -597,7 +597,7 @@ namespace TatakPinoy.Migrations
                     b.HasOne("TatakPinoy.Models.Consignee", "Consignee")
                         .WithMany("ConsigneeStatusHistories")
                         .HasForeignKey("ConsigneeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TatakPinoy.Models.ConsigneeStatus", "ConsigneeStatus")

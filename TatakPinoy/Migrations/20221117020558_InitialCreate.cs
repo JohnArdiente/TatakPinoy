@@ -335,7 +335,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.ConsigneeId,
                         principalTable: "Consignee",
                         principalColumn: "ConsigneeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ConsigneeStatusHistories_ConsigneeStatus_ConsigneeStatusId",
                         column: x => x.ConsigneeStatusId,
