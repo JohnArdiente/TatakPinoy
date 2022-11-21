@@ -10,8 +10,8 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221117020558_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221121025850_InitialCreateLocal")]
+    partial class InitialCreateLocal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -591,7 +591,7 @@ namespace TatakPinoy.Migrations
                     b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
                         .WithMany("Consignees")
                         .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.ConsigneeStatusHistory", b =>

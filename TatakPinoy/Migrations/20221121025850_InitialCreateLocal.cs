@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TatakPinoy.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateLocal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -286,7 +286,7 @@ namespace TatakPinoy.Migrations
                         column: x => x.ShipmentId,
                         principalTable: "Shipment",
                         principalColumn: "ShipmentId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
