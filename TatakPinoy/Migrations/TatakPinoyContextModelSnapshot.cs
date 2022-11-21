@@ -589,7 +589,7 @@ namespace TatakPinoy.Migrations
                     b.HasOne("TatakPinoy.Models.Shipment", "Shipment")
                         .WithMany("Consignees")
                         .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TatakPinoy.Models.ConsigneeStatusHistory", b =>

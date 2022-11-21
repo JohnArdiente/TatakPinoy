@@ -64,6 +64,7 @@
                     <td class="text-center">
                         @Html.ActionLink("Update", "Edit", "Shipments", new { id = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
                         @Html.ActionLink("Add", "Index", "Consignees", new { shipmentid = item.ShipmentId }, new { @class = "btn btn-sm btn-outline-success my-2 my-sm-0" })
+                        <a class="btn btn-sm btn-outline-danger" href="@Url.Action("Delete","Shipments", new { id = item.ShipmentId })" , onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
                     </td>
                 </tr>
                 }

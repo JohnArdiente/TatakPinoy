@@ -57,9 +57,13 @@ namespace TatakPinoy.Data
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-
+            
             modelBuilder.Entity<Consignee>().HasMany(b => b.ConsigneeStatusHistories).WithOne(p => p.Consignee)
             .HasForeignKey(p => p.ConsigneeId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Shipment>().HasMany(b => b.Consignees).WithOne(p => p.Shipment)
+            .HasForeignKey(p => p.ShipmentId)
             .OnDelete(DeleteBehavior.Cascade);
         }
 

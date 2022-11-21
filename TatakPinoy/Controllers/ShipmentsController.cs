@@ -173,33 +173,34 @@ namespace TatakPinoy.Controllers
             return View(model);
         }
 
-        // GET: Shipments/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        /* // GET: Shipments/Delete/5
+         public async Task<IActionResult> Delete(int? id)
+         {
+             if (id == null)
+             {
+                 return NotFound();
+             }
 
-            var shipment = await _context.Shipment
-                .FirstOrDefaultAsync(m => m.ShipmentId == id);
-            if (shipment == null)
-            {
-                return NotFound();
-            }
+             var shipment = await _context.Shipment
+                 .FirstOrDefaultAsync(m => m.ShipmentId == id);
+             if (shipment == null)
+             {
+                 return NotFound();
+             }
 
-            return View(shipment);
-        }
+             return View(shipment);
+         }*/
 
         // POST: Shipments/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        /*[HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]*/
+        public async Task<IActionResult> Delete(int id)
         {
-            var shipment = await _context.Shipment.FindAsync(id);
+            var shipment = await _context.Shipment.Include(x => x.Consignees).FirstOrDefaultAsync(x => x.ShipmentId == id);
             _context.Shipment.Remove(shipment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            //return RedirectToAction("Index", new { shipmentid = consignee.ShipmentId });
         }
 
         private bool ShipmentExists(int id)
