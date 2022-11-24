@@ -83,7 +83,7 @@ namespace TatakPinoy.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsigneeId,TrackingNo,ShipersName,ShipersNo,ConsigneesName,ConsigneesAddr,ConsigneesNo,Qty,AgentsName,PickupDate,ShipmentId")] Consignee consignee)
+        public async Task<IActionResult> Create([Bind("ConsigneeId,Barcode,TrackingNo,BoxType,ShipersName,ShipersNo,ConsigneesName,ConsigneesAddr,ConsigneesNo,Qty,AgentsName,PickupDate,ShipmentId")] Consignee consignee)
         {
             if (ModelState.IsValid)
             {

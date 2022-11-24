@@ -10,8 +10,8 @@ using TatakPinoy.Data;
 namespace TatakPinoy.Migrations
 {
     [DbContext(typeof(TatakPinoyContext))]
-    [Migration("20221121025850_InitialCreateLocal")]
-    partial class InitialCreateLocal
+    [Migration("20221124112748_AddBoxType")]
+    partial class AddBoxType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,6 +228,12 @@ namespace TatakPinoy.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BackloadReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BoxType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ConsigneeStatusId")

@@ -64,6 +64,20 @@
                     <span asp-validation-for="ConsigneesNo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Barcode</label>
+                    <input asp-for="Barcode" class="form-control" />
+                    <span asp-validation-for="Barcode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Type of Box</label>
+                    <select class="form-control" asp-for="BoxType">
+                        <option value="">Select Box Type</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Jumbo">Jumbo</option>
+                        <option value="Irregular">Irregular</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="control-label">Tracking Status</label>
                     <select class="form-control select2" asp-for="ConsigneeStatusId" asp-items="ViewBag.ConsigneeStatusId">
                         <option value="ViewBag.ConsigneeStatusId">Select status</option>

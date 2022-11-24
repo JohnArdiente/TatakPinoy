@@ -228,6 +228,12 @@ namespace TatakPinoy.Migrations
                     b.Property<string>("BackloadReason")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Barcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BoxType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ConsigneeStatusId")
                         .HasColumnType("int");
 

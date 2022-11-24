@@ -15,9 +15,12 @@ namespace TatakPinoy.Models
         public string ConsigneesName { get; set; }
         public string ConsigneesAddr { get; set; }
         public string ConsigneesNo { get; set; }
+        public string Barcode { get; set; }
+        public string BoxType { get; set; }
         public int Qty { get; set; }
         public string AgentsName { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Required]
         public DateTime PickupDate { get; set; }
         public string? RecievedBy { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
