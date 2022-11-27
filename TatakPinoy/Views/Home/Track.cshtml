@@ -74,6 +74,7 @@
 
     media screen and (max-width: 450px) {
         .card
+    }
 
     {
         display: flex;
@@ -131,8 +132,11 @@
                 <center><b>Delivery Information</b></center><br>
                 @*<b>Shipper:</b> &nbsp; &nbsp; &nbsp; @Model.ShipersName<br>*@
                 @*<b>Consignee:</b>&nbsp; &nbsp;@Model.ConsigneesName<br>*@
-                <b>Address:</b> &nbsp; &nbsp; &nbsp; @Model.ConsigneesAddr<br>
-                <b>Quantity:</b>&nbsp; &nbsp; &nbsp; @Model.Qty
+                <b>Serial Number:</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Model.TrackingNo<br>
+                <b>Shipment Number:</b>&nbsp; &nbsp; &nbsp; @Model.Shipment.ShipmentNo<br>
+                <b>Destination:</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Model.Destination<br>
+                <b>Quantity:</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Model.Qty<br>
+                <b>Box Sizes:</b>&nbsp; &nbsp; &nbsp; Regular(@Model.RegularQuantity),Jumbo(@Model.JumboQuantity),Irregular(@Model.IrregularQuantity),@Model.Others (@Model.SpecifyOthers)
             </li>
             <li class="list-group-item" style="height: 40px; padding: 10px 15px;">
                 <center><b>Status Log</b></center><br>
@@ -143,13 +147,13 @@
                 {
                     <li class="list-group-item">
                         <p style="text-align:left">
-                            <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span><br>Delivery Date: &nbsp; &nbsp; @statusHistory.Consignee.DeliveryDate<br>Received By: &nbsp; &nbsp; @statusHistory.Consignee.RecievedBy
+                            <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@<br>Delivery Date: &nbsp; &nbsp; @statusHistory.Consignee.DeliveryDate<br>Received By: &nbsp; &nbsp; @statusHistory.Consignee.RecievedBy
                         </p>
                     </li>
                 }
                 <li class="list-group-item">
                     <p style="text-align:left">
-                        <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
+                        <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
                     </p>
                 </li>
             }
@@ -157,7 +161,7 @@
             {
                 <li class="list-group-item">
                     <p style="text-align:left">
-                        <b>@items.Status.StatusDesc.ToUpper() @items.DateOn?.ToString("MMM d, yyyy")</b><span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
+                        <b>@items.Status.StatusDesc.ToUpper() @items.DateOn?.ToString("MMM d, yyyy")</b>@*<span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
                     </p>
                 </li>
             }

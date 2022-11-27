@@ -70,6 +70,7 @@ namespace TatakPinoy.Controllers
 
                 ws.Cell("A1").Style.Font.FontSize = 10;
                 ws.Cell("A1").Style.Font.FontName = "Calibri Light";
+                ws.Cell("A1").Style.Font.SetBold();
                 ws.Cell("A1").Value = "Shipment Number";
                 ws.Cell("A1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Columns(1, 2).Width = 15;
@@ -81,6 +82,7 @@ namespace TatakPinoy.Controllers
 
                 ws.Cell("A2").Style.Font.FontSize = 10;
                 ws.Cell("A2").Style.Font.FontName = "Calibri Light";
+                ws.Cell("A2").Style.Font.SetBold();
                 ws.Cell("A2").Value = "Container Number";
                 ws.Cell("A2").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Columns(1, 2).Width = 15;
@@ -96,65 +98,79 @@ namespace TatakPinoy.Controllers
 
                 ws.Cell("A7").Style.Font.FontSize = 10;
                 ws.Cell("A7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("A7").Value = "Tracking Number";
+                ws.Cell("A7").Value = "Barcode Number";
                 ws.Cell("A7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("A7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("B7").Style.Font.FontSize = 10;
                 ws.Cell("B7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("B7").Value = "Shipper's Name";
+                ws.Cell("B7").Value = "Tracking Number";
                 ws.Cell("B7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("B7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("C7").Style.Font.FontSize = 10;
                 ws.Cell("C7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("C7").Value = "Shipper's CTC";
+                ws.Cell("C7").Value = "Shipper's Name";
                 ws.Cell("C7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("C7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("D7").Style.Font.FontSize = 10;
                 ws.Cell("D7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("D7").Value = "Consignee";
+                ws.Cell("D7").Value = "Shipper's CTC";
                 ws.Cell("D7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("D7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("E7").Style.Font.FontSize = 10;
                 ws.Cell("E7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("E7").Value = "Consignee's Address";
+                ws.Cell("E7").Value = "Consignee";
                 ws.Cell("E7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("E7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("F7").Style.Font.FontSize = 10;
                 ws.Cell("F7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("F7").Value = "Consingee's CTC";
+                ws.Cell("F7").Value = "Consignee's Address";
                 ws.Cell("F7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("F7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("G7").Style.Font.FontSize = 10;
                 ws.Cell("G7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("G7").Value = "Agent";
+                ws.Cell("G7").Value = "Consingee's CTC";
                 ws.Cell("G7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("G7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("H7").Style.Font.FontSize = 10;
                 ws.Cell("H7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("H7").Value = "Pick-up Date";
+                ws.Cell("H7").Value = "Agent";
                 ws.Cell("H7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("H7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 ws.Cell("I7").Style.Font.FontSize = 10;
                 ws.Cell("I7").Style.Font.FontName = "Calibri Light";
-                ws.Cell("I7").Value = "QTY";
+                ws.Cell("I7").Value = "Pick-up Date";
                 ws.Cell("I7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                 ws.Cell("I7").Style.Font.SetBold();
+                ws.Columns(1, 2).Width = 25;
+
+                ws.Cell("J7").Style.Font.FontSize = 10;
+                ws.Cell("J7").Style.Font.FontName = "Calibri Light";
+                ws.Cell("J7").Value = "QTY";
+                ws.Cell("J7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                ws.Cell("J7").Style.Font.SetBold();
+                ws.Columns(1, 2).Width = 25;
+
+                ws.Cell("J7").Style.Font.FontSize = 10;
+                ws.Cell("J7").Style.Font.FontName = "Calibri Light";
+                ws.Cell("J7").Value = "Destination";
+                ws.Cell("J7").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                ws.Cell("J7").Style.Font.SetBold();
                 ws.Columns(1, 2).Width = 25;
 
                 foreach (Shipment shipment in shipments)
@@ -164,49 +180,59 @@ namespace TatakPinoy.Controllers
 
                             ws.Cell(currentRow, 1).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 1).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 1).Value = consignee.TrackingNo;
+                            ws.Cell(currentRow, 1).Value = consignee.Barcode;
                             ws.Cell(currentRow, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 2).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 2).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 2).Value = consignee.ShipersName.ToUpper();
+                            ws.Cell(currentRow, 2).Value = consignee.TrackingNo.ToUpper();
                             ws.Cell(currentRow, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-                            
 
                             ws.Cell(currentRow, 3).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 3).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 3).Value = consignee.ShipersNo;
+                            ws.Cell(currentRow, 3).Value = consignee.ShipersName.ToUpper();
                             ws.Cell(currentRow, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            
 
                             ws.Cell(currentRow, 4).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 4).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 4).Value = consignee.ConsigneesName;
+                            ws.Cell(currentRow, 4).Value = consignee.ShipersNo;
                             ws.Cell(currentRow, 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 5).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 5).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 5).Value = consignee.ConsigneesAddr;
+                            ws.Cell(currentRow, 5).Value = consignee.ConsigneesName;
                             ws.Cell(currentRow, 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 6).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 6).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 6).Value = consignee.ConsigneesNo;
+                            ws.Cell(currentRow, 6).Value = consignee.ConsigneesAddr;
                             ws.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 7).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 7).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 7).Value = consignee.AgentsName;
+                            ws.Cell(currentRow, 7).Value = consignee.ConsigneesNo;
                             ws.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 8).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 8).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 8).Value = consignee.PickupDate;
+                            ws.Cell(currentRow, 8).Value = consignee.AgentsName;
                             ws.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                             ws.Cell(currentRow, 9).Style.Font.FontSize = 10;
                             ws.Cell(currentRow, 9).Style.Font.FontName = "Calibri Light";
-                            ws.Cell(currentRow, 9).Value = consignee.Qty;
+                            ws.Cell(currentRow, 9).Value = consignee.PickupDate;
                             ws.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                            ws.Cell(currentRow, 10).Style.Font.FontSize = 10;
+                            ws.Cell(currentRow, 10).Style.Font.FontName = "Calibri Light";
+                            ws.Cell(currentRow, 10).Value = consignee.Qty;
+                            ws.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                            ws.Cell(currentRow, 10).Style.Font.FontSize = 10;
+                            ws.Cell(currentRow, 10).Style.Font.FontName = "Calibri Light";
+                            ws.Cell(currentRow, 10).Value = consignee.Destination;
+                            ws.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                             currentRow++;
                         }
                     }

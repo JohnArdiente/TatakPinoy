@@ -16,6 +16,18 @@ namespace TatakPinoy.Models
         public string ConsigneesAddr { get; set; }
         public string ConsigneesNo { get; set; }
         public string Barcode { get; set; }
+
+        public string Destination { get; set; }
+        [Display(Name = "Regular")]
+        public int RegularQuantity { get; set; }
+        [Display(Name = "Jumbo")]
+        public int JumboQuantity { get; set; }
+        [Display(Name = "Irregular")]
+        public int IrregularQuantity { get; set; }
+        public string Others { get; set; }
+        [Display(Name = "Specify:")]
+        public string SpecifyOthers { get; set; }
+
         public string BoxType { get; set; }
         public int Qty { get; set; }
         public string AgentsName { get; set; }

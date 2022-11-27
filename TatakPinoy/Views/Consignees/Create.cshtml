@@ -4,12 +4,12 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="container">
-    <h4>Box Details</h4>
+<div class="container-fluid">
+    <h4>New Box Details</h4>
     <hr />
     <form asp-action="Create">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ConsigneeId" />
                 <input asp-for="ShipmentId" type="hidden" />
@@ -28,11 +28,11 @@
                     <input asp-for="ShipersNo" class="form-control" />
                     <span asp-validation-for="ShipersNo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Quantity</label>
-                    <input asp-for="Qty" class="form-control" />
-                    <span asp-validation-for="Qty" class="text-danger"></span>
-                </div>
+                @*<div class="form-group">
+                <label class="control-label">Quantity</label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>*@
                 <div class="form-group">
                     <label class="control-label">Agent</label>
                     <input asp-for="AgentsName" class="form-control" />
@@ -67,14 +67,60 @@
                     <span asp-validation-for="Barcode" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Type of Box</label>
-                    <select class="form-control" asp-for="BoxType">
-                        <option value="">Select Box Type</option>
-                        <option value="Regular">Regular</option>
-                        <option value="Jumbo">Jumbo</option>
-                        <option value="Irregular">Irregular</option>
-                    </select>
+                    <label asp-for="Destination" class="control-label"></label>
+                    <input asp-for="Destination" class="form-control" />
+                    <span asp-validation-for="Destination" class="text-danger"></span>
                 </div>
+                @*<div class="form-group">
+                <label class="control-label">Box Type</label>
+                <select class="form-control" asp-for="BoxType">
+                    <option value="">Select Box Type</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Jumbo">Jumbo</option>
+                    <option value="Irregular">Irregular</option>
+                </select>
+                </div>*@
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Number of Boxes</label>
+                    <input asp-for="Qty" class="form-control" />
+                    <span asp-validation-for="Qty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RegularQuantity" class="control-label"></label>
+                    <input asp-for="RegularQuantity" class="form-control" />
+                    <span asp-validation-for="RegularQuantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="JumboQuantity" class="control-label"></label>
+                    <input asp-for="JumboQuantity" class="form-control" />
+                    <span asp-validation-for="JumboQuantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IrregularQuantity" class="control-label"></label>
+                    <input asp-for="IrregularQuantity" class="form-control" />
+                    <span asp-validation-for="IrregularQuantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Others" class="control-label"></label>
+                    <input asp-for="Others" class="form-control" />
+                    <span asp-validation-for="Others" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SpecifyOthers" class="control-label"></label>
+                    <input asp-for="SpecifyOthers" type="text" />
+                    <span asp-validation-for="SpecifyOthers" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                <label class="control-label">Box Type</label>
+                <select class="form-control" asp-for="BoxType">
+                    <option value="">Select Box Type</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Jumbo">Jumbo</option>
+                    <option value="Irregular">Irregular</option>
+                </select>
+                </div>*@
                 <br />
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-sm btn-outline-success" />
@@ -83,7 +129,13 @@
             </div>
         </div>
     </form>
-
-
-
 </div>
+
+<style>
+    input {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid black;
+    }
+</style>
