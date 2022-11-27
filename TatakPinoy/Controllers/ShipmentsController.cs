@@ -146,14 +146,14 @@ namespace TatakPinoy.Controllers
 
                 if ((shipment.StatusId != model.StatusId) && model.StatusId != null)
                 {
-                    model.DateOn = new DateTime();
-                    var date = model?.DateOn;
+                    //model.DateOn = new DateTime();
+                    //var date = model?.DateOn;
                     var newHistory = new ShipmentStatusHistory()
                     {
                         ShipmentId = shipment.ShipmentId,
                         StatusId = model.StatusId.Value,
                         UpdatedAt = DateTime.Now,
-                        DateOn = date
+                        DateOn = model.DateOn
                     };
                     if (shipment.ShipmentStatusHistory != null)
                     {
