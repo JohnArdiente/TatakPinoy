@@ -45,5 +45,7 @@ namespace TatakPinoy.Models
         public int? ConsigneeStatusId { get; set; }
         public virtual ConsigneeStatus ConsigneeStatus { get; set; }
         public ICollection<ConsigneeStatusHistory> ConsigneeStatusHistories { get; set; }
+        [Display(Name = "Date")]
+        public DateTime? TrackingStatusDate { get; set; }
     }
 }

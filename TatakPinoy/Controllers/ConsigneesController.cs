@@ -140,7 +140,9 @@ namespace TatakPinoy.Controllers
                     {
                         ConsigneeId = consignee.ConsigneeId,
                         ConsigneeStatusId = model.ConsigneeStatusId.Value,
-                        UpdatedAt = DateTime.Now
+                        UpdatedAt = DateTime.Now,
+                        TrackingStatusDate = model.TrackingStatusDate
+
                     };
                     if (consignee.ConsigneeStatusHistories != null)
                     {

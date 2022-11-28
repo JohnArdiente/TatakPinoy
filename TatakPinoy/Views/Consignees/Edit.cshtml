@@ -127,6 +127,10 @@
                         <option value="ViewBag.ConsigneeStatusId">Select status</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Date</label>
+                    <input asp-for="TrackingStatusDate" class="form-control" type="date" />
+                    <span asp-validation-for="TrackingStatusDate" class="text-danger"></span>
                 <div class="5 box">
                     <label class="control-label">Reason</label>
                     <textarea asp-for="BackloadReason" class="form-control" style="height:100px;"> </textarea>

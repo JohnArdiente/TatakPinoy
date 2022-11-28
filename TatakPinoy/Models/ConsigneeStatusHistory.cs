@@ -13,5 +13,6 @@ namespace TatakPinoy.Models
         public int ConsigneeId { get; set; }
         public virtual Consignee Consignee { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public DateTime? TrackingStatusDate { get; set; }
     }
 }
