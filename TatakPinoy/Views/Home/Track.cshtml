@@ -142,30 +142,43 @@
             <li class="list-group-item" style="height: 40px; padding: 10px 15px;">
                 <center><b>Status Log</b></center><br>
             </li>
-            @foreach (var statusHistory in Model.ConsigneeStatusHistories.OrderByDescending(x => x.UpdatedAt))
-            {
-                if (statusHistory.ConsigneeStatus.ConsigneeStatusDesc == "DELIVERED")
+            @*@foreach (var statusHistory in Model.ConsigneeStatusHistories.OrderByDescending(x => x.UpdatedAt))
+            {*@
+                
+                @*<li class="list-group-item">
+                    <p style="text-align:left">
+                            <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.TrackingStatusDate?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
+                    </p>
+                </li>*@
+                
+            @*}*@
+                @if (Model.ConsigneeStatusHistories.OrderByDescending(x => x.Id).FirstOrDefault().ConsigneeStatus.ConsigneeStatusDesc == "DELIVERED")
                 {
                     <li class="list-group-item">
                         <p style="text-align:left">
-                            <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@<br>Delivery Date: &nbsp; &nbsp; @statusHistory.Consignee.DeliveryDate<br>Received By: &nbsp; &nbsp; @statusHistory.Consignee.RecievedBy
+                        <b>@Model.ConsigneeStatusHistories.OrderByDescending(x=>x.Id).FirstOrDefault().ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@<br>Delivery Date: &nbsp; &nbsp; @Model.DeliveryDate?.ToString("MMM d, yyyy")<br>Received By: &nbsp; &nbsp; @Model.RecievedBy.ToString()
                         </p>
                     </li>
                 }
                 <li class="list-group-item">
                     <p style="text-align:left">
-                            <b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.TrackingStatusDate?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
+                        @*<b>@statusHistory.ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b><span style="float:right;">@statusHistory.TrackingStatusDate?.ToString("MMM d, yyyy")</span> <span style="float:right;">@statusHistory.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
+                        <b>@Model.ConsigneeStatusHistories.OrderByDescending(x=>x.Id).FirstOrDefault().ConsigneeStatus.ConsigneeStatusDesc.ToUpper()</b> <span style="float:right;">@Model.ConsigneeStatusHistories.OrderByDescending(x=>x.Id).FirstOrDefault().TrackingStatusDate?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
                     </p>
                 </li>
-            }
-            @foreach (var items in Model.Shipment.ShipmentStatusHistory)
+            @*@foreach (var items in Model.Shipment.ShipmentStatusHistory)
             {
                 <li class="list-group-item">
                     <p style="text-align:left">
-                            <b>@items.Status.StatusDesc.ToUpper()</b> <span style="float:right;">@items.DateOn?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
+                            <b>@items.Status.StatusDesc.ToUpper()</b> <span style="float:right;">@items.DateOn?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>
                     </p>
                 </li>
-            }
+            }*@
+                <li class="list-group-item">
+                    <p style="text-align:left">
+                        <b>@Model.Shipment.ShipmentStatusHistory.OrderByDescending(x=>x.Id).FirstOrDefault().Status.StatusDesc.ToUpper()</b> <span style="float:right;">@Model.Shipment.ShipmentStatusHistory.OrderByDescending(x=>x.Id).FirstOrDefault().DateOn?.ToString("MMM d, yyyy")</span>@*<span style="float:right;">@items.UpdatedAt.ToString("MMM d, yyyy HH:mm tt")</span>*@
+                </p>
+                </li>
 
         </ul>
     </div>
